@@ -1,1 +1,6 @@
 .DS_Store
+datathon-2024/Mustafa/classification_model.pkl
+datathon-2024/Mustafa/regression_model.pkl
+datathon-2024/Mustafa/scaler.pkl
+datathon-2024/Mustafa/tfidf_vectorizer.pkl
+datathon-2024/Mustafa/word2vec_model.pkl
