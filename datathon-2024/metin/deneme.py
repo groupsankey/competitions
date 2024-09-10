@@ -4,16 +4,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
-from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, accuracy_score, mean_squared_error
 from gensim.models import Word2Vec
 from gensim.utils import simple_preprocess
 from sklearn.feature_extraction.text import TfidfVectorizer
-from scipy.sparse import hstack, csr_matrix
+from scipy.sparse import hstack
 import joblib
 from sklearn.model_selection import cross_val_score
-from sklearn.feature_selection import SelectFromModel
 from catboost import CatBoostRegressor
 
 # Load the data
@@ -21,9 +19,6 @@ df = pd.read_csv('cleanedData.csv')
 
 # Drop rows with missing target values
 df = df.dropna(subset=['degerlendirme_puani'])
-
-# Debugging step: Print column names to verify
-#print("Columns in the DataFrame:", df.columns)
 
 # Extract relevant columns for the classification model
 cat_features = [
@@ -90,9 +85,17 @@ df['combined_text'] = df[text_columns].apply(lambda x: ' '.join(x), axis=1)
 def preprocess_text(text):
     return simple_preprocess(text, deacc=True)
 
-# Prepare Word2Vec model
-sentences = [preprocess_text(text) for text in df['combined_text']]
-word2vec_model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, workers=4)
+# Check if the Word2Vec model already exists
+import os
+if os.path.exists('word2vec_model.model'):
+    # Load the previously saved Word2Vec model
+    word2vec_model = Word2Vec.load('word2vec_model.model')
+else:
+    # Prepare Word2Vec model
+    sentences = [preprocess_text(text) for text in df['combined_text']]
+    word2vec_model = Word2Vec(sentences, vector_size=100, window=5, min_count=1, workers=4)
+    # Save the Word2Vec model
+    word2vec_model.save('word2vec_model.model')
 
 # Create document vectors by averaging word vectors
 def vectorize_text(text):
@@ -229,5 +232,5 @@ feature_names = preprocessor.get_feature_names_out().tolist() + [f'text_feature_
 for name, importance in sorted(zip(feature_names, feature_importance), key=lambda x: x[1], reverse=True)[:20]:
     print(f"Feature: {name}, Importance: {importance:.4f}")
 
-# Save the model
+# Save the CatBoost model
 catboost_model.save_model('catboost_model.cbm')
