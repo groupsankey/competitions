@@ -58,7 +58,6 @@ cat_features = [
  "hangi_stk'nin_uyesisiniz?",
  'stk_projesine_katildiniz_mi?',
  'girisimcilikle_ilgili_deneyiminiz_var_mi?',
- 'girisimcilikle_ilgili_deneyiminizi_aciklayabilir_misiniz?',
  'ingilizce_biliyor_musunuz?',
  'ingilizce_seviyeniz?',
  'daha_onceden_mezun_olunduysa,_mezun_olunan_universite',
@@ -75,7 +74,7 @@ cat_features = [
  'age'
 ]
 
-text_columns = ['girisimcilikle_ilgili_deneyiminiz_var_mi?', 'girisimcilikle_ilgili_deneyiminizi_aciklayabilir_misiniz?']
+text_columns = [ 'girisimcilikle_ilgili_deneyiminizi_aciklayabilir_misiniz?']
 target_column = 'degerlendirme_puani'
 
 # Handle missing values in text columns

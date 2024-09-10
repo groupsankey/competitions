@@ -1,0 +1,2 @@
+submit = 13 puan
+submit1 = 15 puan
