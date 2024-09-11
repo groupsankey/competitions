@@ -48,7 +48,7 @@ cat_features = [
  'girisimcilikle_ilgili_deneyiminiz_var_mi?',
  'ingilizce_biliyor_musunuz?',
  'ingilizce_seviyeniz?',
- 'daha_onceden_mezun_olunduysa_mezun_olunan_universite',
+ 'daha_onceden_mezun_olunduysa,_mezun_olunan_universite',
  'anne_sektor_encoded',
  'baba_sektor_encoded',
  'anne_unknown',
@@ -109,15 +109,14 @@ combined_features = hstack([tfidf_vectors, word2vec_features])
 
 # Prepare data for the model
 X_cat = df[cat_features]
-y = df['degerlendirme_puani']
+y = df['Degerlendirme Puani']
 
-# ColumnTransformer for encoding categorical features
+# Create preprocessor
 preprocessor = ColumnTransformer(
     transformers=[
+        ('num', StandardScaler(), ['mezuniyet_yili']),
         ('cat', OneHotEncoder(handle_unknown='ignore'), cat_features)
-    ],
-    remainder='passthrough'
-)
+    ])
 
 # Fit preprocessor
 X_cat_preprocessed = preprocessor.fit_transform(X_cat)

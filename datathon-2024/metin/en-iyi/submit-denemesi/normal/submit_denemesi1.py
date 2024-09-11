@@ -52,7 +52,7 @@ cat_features = [
  'girisimcilikle_ilgili_deneyiminiz_var_mi?',
  'ingilizce_biliyor_musunuz?',
  'ingilizce_seviyeniz?',
- 'daha_onceden_mezun_olunduysa_mezun_olunan_universite',
+ 'daha_onceden_mezun_olunduysa,_mezun_olunan_universite',
  'anne_sektor_encoded',
  'baba_sektor_encoded',
  'anne_unknown',
@@ -73,7 +73,7 @@ text_columns = [
     'lise_bolum_diger',
     'uye_oldugunuz_kulubun_ismi',
     'spor_dalindaki_rolunuz_nedir?',
-    "hangi_stk_nin_uyesisiniz?",
+    "hangi_stk'nin_uyesisiniz?",
      ]
 target_column = 'degerlendirme_puani'
 
