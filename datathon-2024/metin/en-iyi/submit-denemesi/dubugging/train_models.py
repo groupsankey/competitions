@@ -16,7 +16,52 @@ import os
 # Load the data
 df = pd.read_csv('cleanedData.csv')
 
-# Define text columns and cat_features
+# Extract relevant columns for the classification model
+cat_features = [
+ 'cinsiyet',
+ 'dogum_yeri',
+ 'ikametgah_sehri',
+ 'universite_adi',
+ 'universite_turu',
+ 'burslu_ise_burs_yuzdesi',
+ 'burs_aliyor_mu?',
+ 'universite_kacinci_sinif',
+ 'universite_not_ortalamasi',
+ 'daha_once_baska_bir_universiteden_mezun_olmus',
+ 'lise_adi',
+ 'lise_adi_diger',
+ 'lise_sehir',
+ 'lise_turu',
+ 'lise_mezuniyet_notu',
+ 'baska_bir_kurumdan_burs_aliyor_mu?',
+ 'burs_aldigi_baska_kurum',
+ 'baska_kurumdan_aldigi_burs_miktari',
+ 'anne_egitim_durumu',
+ 'anne_calisma_durumu',
+ 'baba_egitim_durumu',
+ 'baba_calisma_durumu',
+ 'kardes_sayisi',
+ 'girisimcilik_kulupleri_tarzi_bir_kulube_uye_misiniz?',
+ 'profesyonel_bir_spor_daliyla_mesgul_musunuz?',
+ 'aktif_olarak_bir_stk_uyesi_misiniz?',
+ 'stk_projesine_katildiniz_mi?',
+ 'girisimcilikle_ilgili_deneyiminiz_var_mi?',
+ 'ingilizce_biliyor_musunuz?',
+ 'ingilizce_seviyeniz?',
+ 'daha_onceden_mezun_olunduysa_mezun_olunan_universite',
+ 'anne_sektor_encoded',
+ 'baba_sektor_encoded',
+ 'anne_unknown',
+ 'anne_diger',
+ 'anne_kamu',
+ 'anne_ozel_sektor',
+ 'baba_unknown',
+ 'baba_diger',
+ 'baba_kamu',
+ 'baba_ozel_sektor',
+ 'age'
+]
+
 text_columns = [
     'girisimcilikle_ilgili_deneyiminizi_aciklayabilir_misiniz?', 
     'bolum', 
@@ -24,36 +69,8 @@ text_columns = [
     'lise_bolum_diger',
     'uye_oldugunuz_kulubun_ismi',
     'spor_dalindaki_rolunuz_nedir?',
-    "hangi_stk'nin_uyesisiniz?",
-]
-
-cat_features = [
-    'cinsiyet',
-    'universite',
-    'sinif',
-    'mezuniyet_yili',
-    'lise_turu',
-    'lise_sehir',
-    'universite_sehir',
-    'universite_bolum',
-    'universite_bolum_diger',
-    'yuksek_lisans',
-    'yuksek_lisans_bolum',
-    'yuksek_lisans_bolum_diger',
-    'doktora',
-    'doktora_bolum',
-    'doktora_bolum_diger',
-    'calisiyor_musunuz?',
-    'is_deneyimi',
-    'is_deneyimi_suresi',
-    'staj_deneyimi',
-    'staj_deneyimi_suresi',
-    'girisimcilik_deneyimi',
-    'girisimcilik_deneyimi_suresi',
-    'kulup_uyeligi',
-    'spor_dalinda_aktif_misiniz?',
-    'stk_uyeligi',
-]
+    "hangi_stk_nin_uyesisiniz?",
+     ]
 
 # Preprocess data
 df[text_columns] = df[text_columns].fillna('')
@@ -92,14 +109,15 @@ combined_features = hstack([tfidf_vectors, word2vec_features])
 
 # Prepare data for the model
 X_cat = df[cat_features]
-y = df['Degerlendirme Puani']
+y = df['degerlendirme_puani']
 
-# Create preprocessor
+# ColumnTransformer for encoding categorical features
 preprocessor = ColumnTransformer(
     transformers=[
-        ('num', StandardScaler(), ['mezuniyet_yili']),
         ('cat', OneHotEncoder(handle_unknown='ignore'), cat_features)
-    ])
+    ],
+    remainder='passthrough'
+)
 
 # Fit preprocessor
 X_cat_preprocessed = preprocessor.fit_transform(X_cat)
