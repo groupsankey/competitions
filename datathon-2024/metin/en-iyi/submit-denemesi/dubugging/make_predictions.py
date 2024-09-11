@@ -80,7 +80,7 @@ text_columns = [
     'lise_bolum_diger',
     'uye_oldugunuz_kulubun_ismi',
     'spor_dalindaki_rolunuz_nedir?',
-    "hangi_stk'nin_uyesisiniz?",
+    "hangi_stk_nin_uyesisiniz?",
      ]
 
 # Preprocess test data
