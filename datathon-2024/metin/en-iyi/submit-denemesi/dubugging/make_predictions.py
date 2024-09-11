@@ -14,11 +14,10 @@ test_df = pd.read_csv('cleanedTest.csv')
 word2vec_model = Word2Vec.load('word2vec_model.model')
 tfidf_vectorizer = joblib.load('tfidf_vectorizer.joblib')
 preprocessor = joblib.load('preprocessor.joblib')
-selector = joblib.load('feature_selector.joblib')
 
 # Define necessary functions and variables
 def preprocess_text(text):
-    return simple_preprocess(text, deacc=True)
+    return simple_preprocess(str(text), deacc=True)
 
 def vectorize_text(text):
     tokens = preprocess_text(text)
@@ -59,7 +58,7 @@ cat_features = [
  'girisimcilikle_ilgili_deneyiminiz_var_mi?',
  'ingilizce_biliyor_musunuz?',
  'ingilizce_seviyeniz?',
- 'daha_onceden_mezun_olunduysa,_mezun_olunan_universite',
+ 'daha_onceden_mezun_olunduysa_mezun_olunan_universite',
  'anne_sektor_encoded',
  'baba_sektor_encoded',
  'anne_unknown',
@@ -85,7 +84,7 @@ text_columns = [
 
 # Preprocess test data
 test_df[text_columns] = test_df[text_columns].fillna('')
-test_df['combined_text'] = test_df[text_columns].apply(lambda x: ' '.join(x), axis=1)
+test_df['combined_text'] = test_df[text_columns].apply(lambda x: ' '.join(map(str, x)), axis=1)
 
 # Create document vectors for test data
 test_df['text_vector'] = test_df['combined_text'].apply(vectorize_text)
@@ -98,7 +97,11 @@ test_tfidf_vectors = tfidf_vectorizer.transform(test_df['combined_text'])
 test_combined_features = hstack([test_tfidf_vectors, test_word2vec_features])
 
 # Prepare test data for the model
-X_test_cat = test_df[cat_features]
+X_test_cat = test_df[cat_features].copy()
+
+# Convert all columns to string type
+for col in X_test_cat.columns:
+    X_test_cat[col] = X_test_cat[col].astype(str)
 
 # Preprocess test data
 X_test_cat_preprocessed = preprocessor.transform(X_test_cat)
@@ -106,15 +109,12 @@ X_test_cat_preprocessed = preprocessor.transform(X_test_cat)
 # Combine features for test data
 X_test_combined = hstack([X_test_cat_preprocessed, test_combined_features])
 
-# Apply feature selection
-X_test_selected = selector.transform(X_test_combined)
-
 # Load the saved CatBoost model
 loaded_model = CatBoostRegressor()
 loaded_model.load_model('catboost_model.cbm')
 
 # Make predictions
-test_predictions = loaded_model.predict(X_test_selected)
+test_predictions = loaded_model.predict(X_test_combined)
 
 # Create submission DataFrame
 submission = pd.DataFrame({
