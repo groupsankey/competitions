@@ -1,0 +1,261 @@
+(base) metinhunelierdamar@192 metin % python deneme.py
+Classification Model Accuracy: 0.20219231604080748
+/opt/anaconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1509: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/opt/anaconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1509: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+/opt/anaconda3/lib/python3.12/site-packages/sklearn/metrics/_classification.py:1509: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, f"{metric.capitalize()} is", len(result))
+Classification Report:
+               precision    recall  f1-score   support
+
+         1.0       0.00      0.00      0.00         4
+         2.0       0.00      0.00      0.00         2
+         3.0       0.33      0.50      0.40         4
+         4.0       0.50      0.27      0.35        11
+         5.0       0.27      0.62      0.38        95
+         6.0       0.36      0.77      0.49        86
+         7.0       0.32      0.85      0.46       237
+         8.0       0.43      0.57      0.49       154
+         9.0       0.34      0.66      0.45       138
+        10.0       0.31      0.25      0.28       134
+        11.0       0.26      0.32      0.28       119
+        12.0       0.37      0.46      0.41       274
+        13.0       0.20      0.21      0.21       156
+        14.0       0.35      0.34      0.35       236
+        15.0       0.21      0.25      0.23       177
+        16.0       0.30      0.27      0.28       188
+        17.0       0.25      0.20      0.22       137
+        18.0       0.22      0.26      0.23       229
+        19.0       0.18      0.19      0.19       190
+        20.0       0.15      0.14      0.14       259
+        21.0       0.15      0.13      0.14       173
+        22.0       0.22      0.34      0.27       291
+        23.0       0.07      0.08      0.08       167
+        24.0       0.28      0.39      0.33       251
+        25.0       0.10      0.06      0.07       148
+        26.0       0.19      0.24      0.21       242
+        27.0       0.15      0.12      0.14       204
+        28.0       0.16      0.16      0.16       291
+        29.0       0.21      0.15      0.18       185
+        30.0       0.11      0.10      0.10       234
+        31.0       0.16      0.14      0.15       153
+        32.0       0.09      0.08      0.08       222
+        33.0       0.11      0.09      0.10       184
+        34.0       0.11      0.13      0.12       194
+        35.0       0.13      0.11      0.12       160
+        36.0       0.15      0.14      0.15       242
+        37.0       0.13      0.08      0.10       168
+        38.0       0.10      0.10      0.10       217
+        39.0       0.16      0.10      0.12       148
+        40.0       0.09      0.08      0.09       161
+        41.0       0.11      0.09      0.10       163
+        42.0       0.16      0.12      0.14       183
+        43.0       0.12      0.10      0.11       136
+        44.0       0.15      0.12      0.13       168
+        45.0       0.10      0.06      0.08       110
+        46.0       0.11      0.14      0.13       151
+        47.0       0.08      0.03      0.04       100
+        48.0       0.10      0.09      0.09       135
+        49.0       0.08      0.06      0.07        93
+        50.0       0.08      0.05      0.06       112
+        51.0       0.05      0.03      0.04        94
+        52.0       0.14      0.08      0.10        89
+        53.0       0.08      0.05      0.06        87
+        54.0       0.08      0.04      0.05        96
+        55.0       0.14      0.05      0.08        55
+        56.0       0.05      0.04      0.04        80
+        57.0       0.07      0.03      0.04        36
+        58.0       0.18      0.11      0.14        64
+        59.0       0.05      0.03      0.04        32
+        60.0       0.00      0.00      0.00        35
+        61.0       0.08      0.04      0.06        45
+        62.0       0.21      0.06      0.09        54
+        63.0       0.15      0.05      0.08        38
+        64.0       0.08      0.03      0.05        31
+        65.0       0.00      0.00      0.00        14
+        66.0       0.25      0.05      0.09        38
+        67.0       0.00      0.00      0.00        17
+        68.0       0.00      0.00      0.00        13
+        69.0       0.17      0.08      0.11        13
+        70.0       0.00      0.00      0.00        13
+        71.0       0.00      0.00      0.00        12
+        72.0       0.00      0.00      0.00        10
+        73.0       0.00      0.00      0.00         5
+        74.0       0.00      0.00      0.00        10
+        75.0       0.00      0.00      0.00         2
+        76.0       0.00      0.00      0.00         1
+        77.0       0.00      0.00      0.00         8
+        78.0       0.00      0.00      0.00         1
+        79.0       0.00      0.00      0.00         2
+        80.0       0.00      0.00      0.00         1
+        81.0       0.00      0.00      0.00         1
+        84.0       0.00      0.00      0.00         1
+
+    accuracy                           0.20      9214
+   macro avg       0.14      0.14      0.13      9214
+weighted avg       0.18      0.20      0.18      9214
+
+Shape of X_cat: (46068, 48)
+Shape of combined_features: (46068, 1100)
+Type of X_cat: <class 'pandas.core.frame.DataFrame'>
+Type of combined_features: <class 'scipy.sparse._coo.coo_matrix'>
+Dtype of X_cat: cinsiyet                                                 float64
+dogum_yeri                                                object
+ikametgah_sehri                                           object
+universite_adi                                            object
+universite_turu                                           object
+burslu_ise_burs_yuzdesi                                  float64
+burs_aliyor_mu?                                            int64
+bolum                                                     object
+universite_kacinci_sinif                                  object
+universite_not_ortalamasi                                float64
+daha_once_baska_bir_universiteden_mezun_olmus              int64
+lise_adi                                                  object
+lise_adi_diger                                            object
+lise_sehir                                                object
+lise_turu                                                 object
+lise_bolumu                                               object
+lise_bolum_diger                                          object
+lise_mezuniyet_notu                                       object
+baska_bir_kurumdan_burs_aliyor_mu?                       float64
+burs_aldigi_baska_kurum                                   object
+baska_kurumdan_aldigi_burs_miktari                        object
+anne_egitim_durumu                                        object
+anne_calisma_durumu                                        int64
+baba_egitim_durumu                                        object
+baba_calisma_durumu                                        int64
+kardes_sayisi                                            float64
+girisimcilik_kulupleri_tarzi_bir_kulube_uye_misiniz?     float64
+uye_oldugunuz_kulubun_ismi                                object
+profesyonel_bir_spor_daliyla_mesgul_musunuz?             float64
+spor_dalindaki_rolunuz_nedir?                             object
+aktif_olarak_bir_stk_uyesi_misiniz?                        int64
+hangi_stk'nin_uyesisiniz?                                 object
+stk_projesine_katildiniz_mi?                               int64
+girisimcilikle_ilgili_deneyiminiz_var_mi?                 object
+ingilizce_biliyor_musunuz?                                 int64
+ingilizce_seviyeniz?                                      object
+daha_onceden_mezun_olunduysa,_mezun_olunan_universite     object
+anne_sektor_encoded                                        int64
+baba_sektor_encoded                                        int64
+anne_Unknown                                                bool
+anne_diger                                                  bool
+anne_kamu                                                   bool
+anne_ozel sektor                                            bool
+baba_Unknown                                                bool
+baba_diger                                                  bool
+baba_kamu                                                   bool
+baba_ozel sektor                                            bool
+age                                                        int64
+dtype: object
+Dtype of combined_features: float64
+Shape of X_cat_preprocessed: (46068, 43179)
+Shape of combined_features: (46068, 1100)
+Shape of X_combined: (46068, 44279)
+0:	learn: 14.2317244	test: 14.1834266	best: 14.1834266 (0)	total: 150ms	remaining: 2m 30s
+100:	learn: 6.2045945	test: 6.5760605	best: 6.5760605 (100)	total: 9.33s	remaining: 1m 23s
+200:	learn: 5.9839122	test: 6.3576331	best: 6.3573439 (199)	total: 17.6s	remaining: 1m 9s
+300:	learn: 5.8874321	test: 6.3114427	best: 6.3114427 (300)	total: 24.6s	remaining: 57.1s
+400:	learn: 5.8206975	test: 6.2532143	best: 6.2532143 (400)	total: 32.8s	remaining: 48.9s
+500:	learn: 5.7650574	test: 6.2023623	best: 6.2023623 (500)	total: 39.5s	remaining: 39.4s
+600:	learn: 5.7157808	test: 6.1799699	best: 6.1799699 (600)	total: 46.4s	remaining: 30.8s
+700:	learn: 5.6659438	test: 6.1667456	best: 6.1666704 (699)	total: 53.9s	remaining: 23s
+800:	learn: 5.6196821	test: 6.1597863	best: 6.1597863 (800)	total: 1m	remaining: 15.1s
+900:	learn: 5.5780870	test: 6.1406310	best: 6.1404788 (888)	total: 1m 7s	remaining: 7.42s
+Stopped by overfitting detector  (50 iterations wait)
+
+bestTest = 6.131452851
+bestIteration = 939
+
+Shrink model to first 940 iterations.
+0:	learn: 14.0766247	total: 166ms	remaining: 2m 45s
+100:	learn: 6.2327763	total: 8.27s	remaining: 1m 13s
+200:	learn: 6.0121351	total: 15.3s	remaining: 1m
+300:	learn: 5.9133603	total: 22.6s	remaining: 52.5s
+400:	learn: 5.8403699	total: 29.4s	remaining: 43.9s
+500:	learn: 5.7813558	total: 36.2s	remaining: 36s
+600:	learn: 5.7259495	total: 42.9s	remaining: 28.5s
+700:	learn: 5.6798871	total: 49.6s	remaining: 21.1s
+800:	learn: 5.6382123	total: 56.3s	remaining: 14s
+900:	learn: 5.5952817	total: 1m 2s	remaining: 6.92s
+999:	learn: 5.5571890	total: 1m 9s	remaining: 0us
+0:	learn: 14.2923653	total: 101ms	remaining: 1m 41s
+100:	learn: 6.7036511	total: 7.93s	remaining: 1m 10s
+200:	learn: 6.4983234	total: 15.2s	remaining: 1m
+300:	learn: 6.3955971	total: 22.3s	remaining: 51.9s
+400:	learn: 6.3286461	total: 29.4s	remaining: 44s
+500:	learn: 6.2636473	total: 36.5s	remaining: 36.4s
+600:	learn: 6.2090555	total: 43.6s	remaining: 28.9s
+700:	learn: 6.1624759	total: 50.5s	remaining: 21.6s
+800:	learn: 6.1171712	total: 57.5s	remaining: 14.3s
+900:	learn: 6.0750110	total: 1m 4s	remaining: 7.09s
+999:	learn: 6.0334864	total: 1m 11s	remaining: 0us
+0:	learn: 14.2741034	total: 146ms	remaining: 2m 25s
+100:	learn: 6.6331169	total: 8.34s	remaining: 1m 14s
+200:	learn: 6.4254058	total: 17.5s	remaining: 1m 9s
+300:	learn: 6.3299276	total: 25.4s	remaining: 59.1s
+400:	learn: 6.2590019	total: 33.4s	remaining: 49.8s
+500:	learn: 6.1912447	total: 42.2s	remaining: 42s
+600:	learn: 6.1407635	total: 51.2s	remaining: 34s
+700:	learn: 6.0939111	total: 1m	remaining: 26s
+800:	learn: 6.0552003	total: 1m 11s	remaining: 17.7s
+900:	learn: 6.0075257	total: 1m 24s	remaining: 9.25s
+999:	learn: 5.9686232	total: 1m 34s	remaining: 0us
+0:	learn: 14.1361305	total: 141ms	remaining: 2m 20s
+100:	learn: 5.4146851	total: 9.89s	remaining: 1m 28s
+200:	learn: 5.1724685	total: 18.7s	remaining: 1m 14s
+300:	learn: 5.0680252	total: 27.2s	remaining: 1m 3s
+400:	learn: 4.9860709	total: 35.7s	remaining: 53.3s
+500:	learn: 4.9253275	total: 43.9s	remaining: 43.7s
+600:	learn: 4.8661882	total: 55.4s	remaining: 36.8s
+700:	learn: 4.8199526	total: 1m 4s	remaining: 27.3s
+800:	learn: 4.7635104	total: 1m 12s	remaining: 17.9s
+900:	learn: 4.7221117	total: 1m 20s	remaining: 8.79s
+999:	learn: 4.6802695	total: 1m 27s	remaining: 0us
+0:	learn: 14.2995274	total: 101ms	remaining: 1m 41s
+100:	learn: 5.8504981	total: 7.99s	remaining: 1m 11s
+200:	learn: 5.6421631	total: 14.5s	remaining: 57.6s
+300:	learn: 5.5451435	total: 21.4s	remaining: 49.8s
+400:	learn: 5.4706154	total: 28.2s	remaining: 42.2s
+500:	learn: 5.4082243	total: 35.6s	remaining: 35.4s
+600:	learn: 5.3508917	total: 46s	remaining: 30.5s
+700:	learn: 5.3051928	total: 54.2s	remaining: 23.1s
+800:	learn: 5.2604466	total: 1m 1s	remaining: 15.4s
+900:	learn: 5.2216328	total: 1m 9s	remaining: 7.67s
+999:	learn: 5.1848654	total: 1m 17s	remaining: 0us
+Cross-validation RMSE: 6.8364 (+/- 57.5398)
+Regression Model RMSE: 6.1339
+
+Sample Actual vs. Predicted Values:
+Actual: 41.00, Predicted: 39.49
+Actual: 58.00, Predicted: 55.22
+Actual: 46.00, Predicted: 46.82
+Actual: 20.00, Predicted: 22.33
+Actual: 9.00, Predicted: 11.15
+Actual: 38.00, Predicted: 44.08
+Actual: 28.00, Predicted: 20.69
+Actual: 28.00, Predicted: 28.69
+Actual: 13.00, Predicted: 32.30
+Actual: 28.00, Predicted: 31.63
+Feature: num__profesyonel_bir_spor_daliyla_mesgul_musunuz?, Importance: 21.6048
+Feature: num__girisimcilik_kulupleri_tarzi_bir_kulube_uye_misiniz?, Importance: 19.9895
+Feature: num__aktif_olarak_bir_stk_uyesi_misiniz?, Importance: 11.5690
+Feature: num__stk_projesine_katildiniz_mi?, Importance: 9.7385
+Feature: cat__girisimcilikle_ilgili_deneyiminiz_var_mi?_0, Importance: 5.9059
+Feature: num__universite_not_ortalamasi, Importance: 3.0627
+Feature: cat__spor_dalindaki_rolunuz_nedir?_diger, Importance: 2.8007
+Feature: cat__spor_dalindaki_rolunuz_nedir?_0, Importance: 2.7867
+Feature: num__cinsiyet, Importance: 2.5877
+Feature: num__age, Importance: 1.8952
+Feature: cat__lise_mezuniyet_notu_75 - 100, Importance: 1.2505
+Feature: num__anne_calisma_durumu, Importance: 1.0596
+Feature: text_feature_1022, Importance: 1.0013
+Feature: text_feature_1059, Importance: 0.8285
+Feature: cat__girisimcilikle_ilgili_deneyiminiz_var_mi?_-, Importance: 0.7858
+Feature: cat__girisimcilikle_ilgili_deneyiminiz_var_mi?_1, Importance: 0.7419
+Feature: num__ingilizce_biliyor_musunuz?, Importance: 0.7142
+Feature: cat__lise_mezuniyet_notu_84-70, Importance: 0.5905
+Feature: cat__uye_oldugunuz_kulubun_ismi_-, Importance: 0.5380
+Feature: cat__lise_turu_diger, Importance: 0.5312
+(base) metinhunelierdamar@192 metin % 
