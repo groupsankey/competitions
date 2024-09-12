@@ -1,0 +1,6 @@
+catboost_info
+feature_selector.joblib
+tfidf_vectorizer.joblib
+word2vec_model.joblib
+../catboost_model.cbm 
+../preprocessor.joblib
