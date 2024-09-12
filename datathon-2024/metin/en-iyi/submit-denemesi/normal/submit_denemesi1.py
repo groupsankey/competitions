@@ -17,64 +17,27 @@ from catboost import CatBoostRegressor
 # Load the data
 df = pd.read_csv('cleanedData.csv')
 
+df = df.drop(['burslu_ise_burs_yuzdesi', 'daha_once_baska_bir_universiteden_mezun_olmus', 'lise_adi_diger', 'lise_bolum_diger',
+              'uye_oldugunuz_kulubun_ismi', 'stk_projesine_katildiniz_mi?', 'ingilizce_seviyeniz?',
+              'daha_onceden_mezun_olunduysa_mezun_olunan_universite'], axis=1)
+
 # Drop rows with missing target values
 df = df.dropna(subset=['degerlendirme_puani'])
 
 # Extract relevant columns for the classification model
 cat_features = [
- 'cinsiyet',
- 'dogum_yeri',
- 'ikametgah_sehri',
- 'universite_adi',
- 'universite_turu',
- 'burslu_ise_burs_yuzdesi',
- 'burs_aliyor_mu?',
- 'universite_kacinci_sinif',
- 'universite_not_ortalamasi',
- 'daha_once_baska_bir_universiteden_mezun_olmus',
- 'lise_adi',
- 'lise_adi_diger',
- 'lise_sehir',
- 'lise_turu',
- 'lise_mezuniyet_notu',
- 'baska_bir_kurumdan_burs_aliyor_mu?',
- 'burs_aldigi_baska_kurum',
- 'baska_kurumdan_aldigi_burs_miktari',
- 'anne_egitim_durumu',
- 'anne_calisma_durumu',
- 'baba_egitim_durumu',
- 'baba_calisma_durumu',
- 'kardes_sayisi',
- 'girisimcilik_kulupleri_tarzi_bir_kulube_uye_misiniz?',
- 'profesyonel_bir_spor_daliyla_mesgul_musunuz?',
- 'aktif_olarak_bir_stk_uyesi_misiniz?',
- 'stk_projesine_katildiniz_mi?',
- 'girisimcilikle_ilgili_deneyiminiz_var_mi?',
- 'ingilizce_biliyor_musunuz?',
- 'ingilizce_seviyeniz?',
- 'daha_onceden_mezun_olunduysa_mezun_olunan_universite',
- 'anne_sektor_encoded',
- 'baba_sektor_encoded',
- 'anne_unknown',
- 'anne_diger',
- 'anne_kamu',
- 'anne_ozel_sektor',
- 'baba_unknown',
- 'baba_diger',
- 'baba_kamu',
- 'baba_ozel_sektor',
- 'age'
+    'cinsiyet', 'dogum_yeri', 'ikametgah_sehri', 'universite_adi', 'universite_turu',
+    'burs_aliyor_mu?', 'universite_kacinci_sinif', 'universite_not_ortalamasi',
+    'lise_mezuniyet_notu', 'baska_bir_kurumdan_burs_aliyor_mu?', 'baska_kurumdan_aldigi_burs_miktari', 
+    'anne_calisma_durumu', 'baba_calisma_durumu', 'kardes_sayisi',
+    'girisimcilik_kulupleri_tarzi_bir_kulube_uye_misiniz?', 'profesyonel_bir_spor_daliyla_mesgul_musunuz?',
+    'aktif_olarak_bir_stk_uyesi_misiniz?', 'girisimcilikle_ilgili_deneyiminiz_var_mi?', 'ingilizce_biliyor_musunuz?',
+    'anne_sektor_encoded', 'baba_sektor_encoded', 'anne_unknown', 'anne_diger', 'anne_kamu',
+    'anne_ozel_sektor', 'baba_unknown', 'baba_diger', 'baba_kamu', 'baba_ozel_sektor', 'age'
 ]
 
-text_columns = [
-    'girisimcilikle_ilgili_deneyiminizi_aciklayabilir_misiniz?', 
-    'bolum', 
-    'lise_bolumu', 
-    'lise_bolum_diger',
-    'uye_oldugunuz_kulubun_ismi',
-    'spor_dalindaki_rolunuz_nedir?',
-    "hangi_stk_nin_uyesisiniz?",
-     ]
+text_columns = ['girisimcilikle_ilgili_deneyiminizi_aciklayabilir_misiniz?', "bolum", "lise_adi", 'lise_sehir', 'lise_turu', 'lise_bolumu',
+                'burs_aldigi_baska_kurum', 'anne_egitim_durumu', 'baba_egitim_durumu', 'spor_dalindaki_rolunuz_nedir?', "hangi_stk_nin_uyesisiniz?"]
 target_column = 'degerlendirme_puani'
 
 # Handle missing values in text columns
@@ -251,6 +214,10 @@ catboost_model.save_model('catboost_model.cbm')
 
 # Load the test data
 test_df = pd.read_csv('cleanedTest.csv')
+test_df["cinsiyet"] = test_df["cinsiyet"].fillna(1.0)
+test_df = test_df.drop(['burslu_ise_burs_yuzdesi', 'daha_once_baska_bir_universiteden_mezun_olmus', 'lise_adi_diger', 'lise_bolum_diger',
+              'uye_oldugunuz_kulubun_ismi', 'stk_projesine_katildiniz_mi?', 'ingilizce_seviyeniz?',
+              'daha_onceden_mezun_olunduysa_mezun_olunan_universite'], axis=1)
 
 # Preprocess test data
 test_df[text_columns] = test_df[text_columns].fillna('')
