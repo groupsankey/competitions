@@ -1,0 +1,34 @@
+Proje Adı: Entegre Eğitim Platformu – Öğrenci ve Öğretmen için Çalışma Uygulaması ve Beyaz Sayfa
+
+Proje Amacı:
+Bu platform, öğrencilerin SAT, IELTS, TOEFL gibi uluslararası sınavlar ve Türk eğitim müfredatı gibi çeşitli eğitim programlarına yönelik, kazanımlara odaklı çalışma programları oluşturarak ders etkinliğini artırmayı hedefler. Çalışma Uygulaması ile hazırlanan sorular ve içerikler, Beyaz Sayfa uygulamasına entegre edilerek öğretmen ve öğrencilerin interaktif bir öğrenme süreci geçirmesi sağlanacaktır. Beyaz sayfa üzerinden ders içi etkinliklerin ve örnek soru çözümlerinin yapılması, öğrencilerin gelişim sürecini daha verimli hale getirecektir.
+
+Proje Tanımı:
+
+Farklı Müfredatlar: SAT, IELTS, TOEFL ve Türk eğitim müfredatı gibi seçeneklerle, her bir müfredata özel kazanımlar ve öğrenme içerikleri sunulacak. Bu sayede öğrenciler, ihtiyaçlarına ve hedeflerine uygun bir programla çalışabilecek.
+Genelden Özele Giden Tekrar Programları: Öğrencilere önce genel bir çerçeve sunulacak, ardından konuları ayrıntılı olarak ele alan bir programla detaylara inilecektir.
+Konu Özetleri, Kısa Sorular ve Flashcardlar: Her müfredata özel konu özetleri, kısa sorular ve hızlı öğrenme için flashcardlar sunulacak. Öğrenciler, temel kavramları daha hızlı tekrar edebilir ve eksikliklerini kolayca belirleyebilir.
+Örnek Soru Gönderimi ve Beyaz Sayfaya Aktarma: Çalışma Uygulaması’ndan alınan örnek sorular, Beyaz Sayfa uygulamasına aktarılacak. Böylece öğrenci ve öğretmen, soruları interaktif olarak akıllı tahtadan veya tabletten çözebilecek.
+İki Yönlü Etkileşim: Beyaz sayfa üzerinde öğrenci soruya çözüm yaparken, öğretmen anında müdahale edebilir veya açıklamalar ekleyebilir. Bu iki yönlü etkileşim, hem yüz yüze hem de uzaktan eğitim ortamında kullanılabilecek.
+Basit Oyunlar ve Hafıza Aktiviteleri: Her müfredata özel hafıza ve bilgi oyunları, öğrencilerin konu tekrarını eğlenceli hale getirerek daha kalıcı bir öğrenme sağlar.
+Kazanımlara Yönelik Çalışma ve Zorluk Seviyesi Belirleme: Müfredata uygun kazanımlar üzerinde yoğunlaşan sorular ve içerikler seçilecek, öğrencinin kendi seviyesine göre çalışma yapmasını sağlamak için kolaydan zora zorluk seviyeleri bulunacaktır.
+Gemini API Entegrasyonu:
+
+Konu Özetleri ve Flashcard İçeriği: Gemini API, konu özetleri ve açıklayıcı flashcard içerikleriyle her müfredata uygun bilgi sağlarken, öğrencinin öğrenme hızına göre içeriği dinamik olarak uyarlayacak.
+Akıllı Öneri Sistemi: Öğrencinin önceki çözümlerine ve zorluk seviyesine göre Gemini API, çalışılması gereken konular ve kazanımlara göre özelleştirilmiş öneriler sunabilir.
+Beyaz Sayfa Çözüm İçerikleri ve Anlık Yardım: Beyaz sayfada çözülmek üzere alınan sorular için API, öğrencinin seviyesine uygun ipuçları ve çözüm önerileri sunabilir.
+Dil ve Anlam Desteği: Özellikle TOEFL ve IELTS gibi sınavlara hazırlık sürecinde, öğrencinin anlamını öğrenmek istediği kelime veya ifadeler için Gemini API doğrudan açıklamalar veya örnek cümleler sunabilir.
+Teknik Detaylar:
+
+Altyapı: Mobil ve web tabanlı çalışacak uygulama için Python veya Node.js tabanlı bir backend kullanılacak. Çalışma ve beyaz sayfa uygulamaları arasında veri transferi API entegrasyonlarıyla sağlanacak.
+Akıllı Tahta ve Tablet Desteği: Her iki uygulama soruları akıllı tahtada veya tabletten aynı anda görüntüleyip, çözümleri güncelleyebilecek.
+Teknolojiler: Frontend için React Native veya Flutter gibi mobil uyumlu teknolojiler; veri tabanı için MySQL veya Firebase tercih edilecek.
+Kişiselleştirme ve Başarı Sistemi: Öğrencinin bilgi seviyesine göre uyarlanan içerikler Gemini API üzerinden analiz edilerek başarı sistemi ile desteklenecek.
+Faydalar:
+
+Kapsamlı ve Verimli Öğrenme: Öğrenciler, genelden özele ilerleyen tekrar programları ile kazanımlara odaklanarak daha etkili öğrenir.
+Etkili Etkileşim ve Çözüm Süreci: Öğrenciler ve öğretmenler, beyaz sayfa üzerinde gerçek zamanlı etkileşimle çözüm sürecini daha verimli hale getirir.
+Dinamik İçerik ve Zorluk Seviyesine Göre Uyum: Gemini API ile desteklenen konu özetleri, kısa sorular ve oyunlar ile öğrencinin bilgi seviyesi ve öğrenme tarzına uyum sağlanır.
+Tek Noktadan Çalışma İmkanı: Çalışma ve beyaz sayfa uygulamasının birleşimi, öğrencinin tek bir platform üzerinden öğrenme sürecini kişiselleştirmesine olanak tanır.
+Sonuç:
+Entegre Eğitim Platformu, öğrencilerin çeşitli müfredatlara yönelik kazanımlarını geliştirmelerine olanak tanır ve beyaz sayfa entegrasyonu ile ders içi interaktif etkinlikleri destekler. Gemini API ile zenginleştirilen içerikler ve anlık öneriler sayesinde, öğrencilerin öğrenme süreçleri verimli ve kişiselleştirilmiş hale getirilir. Bu platform, uluslararası sınavlara ve okul müfredatına yönelik çalışmalar için yenilikçi bir eğitim aracı olarak öğrenci ve öğretmenlerin hizmetine sunulur.

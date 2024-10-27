@@ -1,0 +1,20 @@
+Proje Adı: Beyaz Sayfa Uygulaması
+
+Proje Amacı:
+Beyaz Sayfa Uygulaması, öğretmen ve öğrenciler arasında gerçek zamanlı interaktif bir eğitim aracı olarak geliştirilmiştir. Bu uygulama ile öğretmenler ders sırasında veya ders dışı saatlerde öğrencilerle aynı beyaz sayfa üzerinde çalışarak, etkileşimi artırabilir ve öğrenme sürecini hızlandırabilir. Uygulama, özellikle uzaktan eğitimde veya hibrit derslerde sınıf ortamını dijital bir platforma taşımayı amaçlamaktadır.
+
+Proje Tanımı:
+
+Sınıflar ve Tahtalar: Her sınıf için ayrı bir beyaz tahta alanı olacak. Öğretmen, dersi anlatırken veya soru çözerken öğrenciyle aynı beyaz sayfa üzerinde işlem yapabilir.
+Ortak Beyaz Sayfa Kullanımı: Öğretmen ve öğrenciler, aynı beyaz sayfa üzerinde çalışabilir. Örneğin, öğretmen ders sırasında tabletinden bir soru yazar ve öğrenciyi tahtaya kaldırarak soruyu çözmesini ister. Öğrenci, beyaz sayfada soruyu çözerken öğretmen de ek açıklamalar yapabilir veya müdahale edebilir.
+Gerçek Zamanlı Senkronizasyon: Öğrenci ve öğretmen aynı anda beyaz sayfa üzerinde işlem yapabilir; bu da hem öğretmenin hem de öğrencinin ders takibini kolaylaştırır. Herhangi bir gecikme yaşanmadan tüm kullanıcılar sayfada yapılan değişiklikleri anında görebilir.
+Kullanıcı Yetkilendirme: Öğretmen, öğrencilerin yazma yetkisini yönetebilir. Örneğin, yalnızca belirli bir öğrenciyi tahtaya kaldırarak beyaz sayfada çözüm yapmasını sağlayabilir. Aynı zamanda, öğretmen beyaz sayfa üzerinde örnek çözümler yapabilir veya ipuçları ekleyebilir.
+Teknik Detaylar:
+
+Faydalar:
+
+Etkili Etkileşim: Öğrenci ve öğretmenler arasında canlı ve interaktif bir öğrenme süreci sağlar.
+Öğrenme Sürecinin Takibi: Öğrencinin yaptığı çözüm ve öğretmenin yaptığı açıklamalar aynı beyaz sayfa üzerinde yer aldığından, ders takibi kolaylaşır.
+Uzaktan Eğitimde Erişim Kolaylığı: Hibrit veya uzaktan eğitim ortamlarında sınıf içi etkileşimi simüle ederek daha etkili bir eğitim deneyimi sağlar.
+Sonuç:
+Beyaz Sayfa Uygulaması, öğrenci-öğretmen etkileşimini artırarak ders sürecini daha verimli hale getirmeyi amaçlayan, yenilikçi bir dijital eğitim platformudur.

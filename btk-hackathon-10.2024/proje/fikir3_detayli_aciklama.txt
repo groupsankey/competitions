@@ -1,0 +1,26 @@
+Proje Adı: Beyaz Sayfa Uygulaması - Geometrik Çizim Destekli Uzantı
+
+Proje Amacı:
+Beyaz Sayfa Uygulaması’na eklenen bu özellik, özellikle geometri derslerinde öğretmen ve öğrencilerin çizim becerilerini kolaylaştırarak, dersin verimliliğini artırmayı amaçlar. Geometri dersleri sırasında beyaz sayfa üzerinde kötü çizilmiş üçgenler, çemberler ve diğer geometrik şekiller otomatik olarak kusursuz hale getirilecek; öğretmen ve öğrenciye hazır geometrik taslaklar sunulacaktır.
+
+Proje Tanımı:
+
+Otomatik Şekil Düzeltme: Öğrencinin ya da öğretmenin çizdiği üçgen, kare, çember gibi şekiller, yazılım tarafından algılanarak kusursuz hale getirilecek. Kötü çizilen şekiller, geometrik doğruluğa göre otomatik olarak düzenlenecektir.
+Hazır Geometrik Taslaklar: Beyaz sayfa üzerinde kare, dikdörtgen, üçgen, daire gibi temel geometrik şekillerin hazır taslakları bulunacak. Öğretmen veya öğrenci, hızlıca bu şekillerden seçim yaparak ders içeriğini geliştirebilir.
+Geometriye Özel Beyaz Sayfa Araçları: Uygulama, özel cetvel, pergel ve açı ölçer araçları da içerecek. Böylece, ders sırasında beyaz sayfa üzerinde ölçümler yapılarak şekil çizimlerinde daha yüksek doğruluk sağlanacak.
+Gemini API ile Desteklenen İçerik Önerileri: Özellikle geometri konularında, Gemini API kullanılarak öğrenciye yönelik hazır problem ve çözüm önerileri, ipuçları ya da pratik uygulama alanları sunulabilir.
+Teknik Detaylar:
+
+Şekil Tanıma ve Düzeltme Algoritmaları: Yapay zeka destekli algoritmalar ile kullanıcının çizim şekli anında algılanarak belirli bir düzeltme sağlanacak. Bu sayede her şekil ideal bir geometriye sahip olacak.
+Geometrik Hazır Şablonlar: Öğrenci ve öğretmenin kolay erişimi için hazırlanan hazır geometrik şekiller, uygulama arayüzüne entegre edilerek kullanım kolaylığı sağlanacak.
+Gemini API Entegrasyonu:
+Akıllı İçerik Önerileri: Öğrencinin çizdiği şekillere ve çözdüğü problemlere göre uygun öneriler sağlanabilir. Örneğin, öğrenci bir üçgen çizerse, üçgenin özelliklerine dair kısa bilgiler veya benzer sorular Gemini API tarafından önerilebilir.
+Geometri Konularında Çizim Desteği: Özel geometri dersleri sırasında sık kullanılan teorem ve şekillere yönelik kısa açıklamalar ve pratik notlar da Gemini API ile sağlanabilir.
+Faydalar:
+
+Hızlı ve Kusursuz Çizimler: Öğretmen ve öğrenciler, otomatik şekil düzeltme özelliği ile daha düzgün ve anlaşılır çizimler yapabilir, böylece ders sırasında zamandan tasarruf edilir.
+Daha Kolay Anlatım ve Öğrenim: Hazır taslaklar ve otomatik düzeltme, geometri konularının anlaşılmasını kolaylaştırır.
+Kapsamlı Geometri Araçları: Geometriye özel araçlar (cetvel, pergel vb.) beyaz sayfa uygulamasında öğrencinin temel çizim gereksinimlerini karşılar.
+Dinamik İçerik ve Problem Önerileri: Gemini API, öğrencinin ilerleme seviyesine göre dinamik içerik önerileri sunarak, öğrencinin ihtiyaçlarına uygun bir öğrenme deneyimi sağlar.
+Sonuç:
+Bu genişletilmiş Beyaz Sayfa Uygulaması, geometrik çizimlerde sağladığı otomatik düzeltme ve hazır taslaklar ile, özellikle geometri dersleri için öğretmen ve öğrencilere verimli bir dijital araç sunar. Gemini API desteğiyle, öğrencilere özel içerik ve problem önerileri sağlayarak öğrenme sürecini kişiselleştirir ve destekler.
