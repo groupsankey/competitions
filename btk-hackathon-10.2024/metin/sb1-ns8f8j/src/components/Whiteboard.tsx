@@ -1,7 +1,46 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Pencil, Users, Share2, Layout } from 'lucide-react';
+import io from 'socket.io-client';
 
-export default function Whiteboard() {
+const socket = io('http://localhost:4000');
+
+function Whiteboard({ boardId }) {
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const context = canvas?.getContext('2d');
+
+    if (!context) {
+      console.error('Failed to get canvas context');
+      return;
+    }
+
+    socket.on(`draw-${boardId}`, (data) => {
+      console.log('Received draw data:', data);
+      const { x, y, color } = data;
+      context.fillStyle = color;
+      context.fillRect(x, y, 2, 2);
+    });
+
+    return () => {
+      socket.off(`draw-${boardId}`);
+    };
+  }, [boardId]);
+
+  const handleDraw = (event: React.MouseEvent<HTMLCanvasElement>) => {
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const rect = canvas.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      const color = 'black'; // Example color
+
+      console.log('Emitting draw data:', { x, y, color });
+      socket.emit(`draw-${boardId}`, { x, y, color });
+    }
+  };
+
   return (
     <div className="py-24 bg-white" id="whiteboard">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -56,10 +95,12 @@ export default function Whiteboard() {
           
           <div className="mt-12 lg:mt-0">
             <div className="relative">
-              <img
+              <canvas
+                ref={canvasRef}
+                width={800}
+                height={600}
                 className="rounded-2xl shadow-xl ring-1 ring-black ring-opacity-5"
-                src="https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80"
-                alt="Interactive whiteboard demonstration"
+                onMouseMove={handleDraw}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent rounded-2xl" />
             </div>
@@ -69,3 +110,5 @@ export default function Whiteboard() {
     </div>
   );
 }
+
+export default Whiteboard;
