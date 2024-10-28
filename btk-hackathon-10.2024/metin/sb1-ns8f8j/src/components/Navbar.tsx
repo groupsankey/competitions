@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { BookOpen } from 'lucide-react';
+import { BookOpen, Function } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -20,6 +20,10 @@ export default function Navbar() {
             <a href="#features" className="block px-3 py-2 text-gray-700 hover:text-indigo-600">Features</a>
             <a href="#curriculum" className="block px-3 py-2 text-gray-700 hover:text-indigo-600">Curriculum</a>
             <a href="#whiteboard" className="block px-3 py-2 text-gray-700 hover:text-indigo-600">Whiteboard</a>
+            <Link to="/graphing" className="flex items-center px-3 py-2 text-gray-700 hover:text-indigo-600">
+              <Function className="h-5 w-5 mr-1" />
+              Graphing
+            </Link>
             <button 
               onClick={() => navigate('/get-started')}
               className="w-full text-left px-3 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700"
