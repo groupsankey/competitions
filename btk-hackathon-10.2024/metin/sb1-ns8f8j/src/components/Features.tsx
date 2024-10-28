@@ -1,5 +1,6 @@
 import React from 'react';
 import { BookOpen, PenTool, Globe, Brain, Users, Gamepad } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const features = [
   {
@@ -11,6 +12,7 @@ const features = [
     name: 'Interactive Whiteboard',
     description: 'Real-time collaboration between students and teachers with digital whiteboard integration.',
     icon: PenTool,
+    path: '/whiteboard', // Add a path for navigation
   },
   {
     name: 'AI-Powered Learning',
@@ -35,6 +37,8 @@ const features = [
 ];
 
 export default function Features() {
+  const navigate = useNavigate();
+
   return (
     <div className="py-12 bg-white" id="features">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,6 +61,14 @@ export default function Features() {
                 </div>
                 <p className="ml-16 text-lg leading-6 font-medium text-gray-900">{feature.name}</p>
                 <p className="mt-2 ml-16 text-base text-gray-500">{feature.description}</p>
+                {feature.path && (
+                  <button
+                    onClick={() => navigate(feature.path)} // Navigate to the whiteboard
+                    className="ml-16 mt-4 text-indigo-600 hover:underline"
+                  >
+                    Go to Whiteboard
+                  </button>
+                )}
               </div>
             ))}
           </div>

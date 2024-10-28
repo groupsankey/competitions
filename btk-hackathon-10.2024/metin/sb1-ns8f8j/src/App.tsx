@@ -8,9 +8,14 @@ import Whiteboard from './components/Whiteboard';
 import CallToAction from './components/CallToAction';
 import GetStarted from './components/GetStarted';
 import ClassBoardSelector from './components/ClassBoardSelector';
+import Login from './components/Login';
 
 function App() {
-  const [selectedBoard, setSelectedBoard] = useState(null);
+  const [user, setUser] = useState(null); // State to hold user data
+
+  const handleLogin = (userData) => {
+    setUser(userData); // Set the user data on login
+  };
 
   return (
     <Router>
@@ -22,15 +27,12 @@ function App() {
               <Hero />
               <Features />
               <Curriculum />
-              {selectedBoard ? (
-                <Whiteboard boardId={selectedBoard.id} />
-              ) : (
-                <ClassBoardSelector onSelectBoard={setSelectedBoard} />
-              )}
               <CallToAction />
             </div>
           } />
           <Route path="/get-started" element={<GetStarted />} />
+          <Route path="/class-board-selector" element={<ClassBoardSelector />} />
+          <Route path="/whiteboard" element={user ? <Whiteboard user={user} /> : <Login onLogin={handleLogin} />} />
         </Routes>
       </div>
     </Router>
