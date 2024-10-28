@@ -10,13 +10,12 @@ import CallToAction from './components/CallToAction';
 import GetStarted from './components/GetStarted';
 import ClassBoardSelector from './components/ClassBoardSelector';
 import Login from './components/Login';
-import GraphingCalculator from './components/GraphingCalculator';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); // State to hold user data
 
   const handleLogin = (userData) => {
-    setUser(userData);
+    setUser(userData); // Set the user data on login
   };
 
   return (
@@ -36,11 +35,6 @@ function App() {
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/class-board-selector" element={<ClassBoardSelector />} />
           <Route path="/whiteboard" element={user ? <Whiteboard user={user} /> : <Login onLogin={handleLogin} />} />
-          <Route path="/graphing" element={
-            <div className="pt-20 px-4 max-w-7xl mx-auto">
-              <GraphingCalculator />
-            </div>
-          } />
         </Routes>
       </div>
     </Router>
