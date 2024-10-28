@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { io } from 'socket.io-client';
-import { Square, Circle, Triangle, Type, Pencil, Eraser, FileUp } from 'lucide-react';
+import { Square, Circle, Triangle, Type, Pencil, Eraser, FileUp, ZoomIn, ZoomOut, Move, ChevronUp, ChevronDown } from 'lucide-react';
 
-type Tool = 'pen' | 'eraser' | 'text' | 'rectangle' | 'circle' | 'triangle';
+type Tool = 'pen' | 'eraser' | 'text' | 'rectangle' | 'circle' | 'triangle' | 'move';
 type DrawingMode = 'free' | 'shape';
 
 const Whiteboard = ({ user }) => {
   const socket = io('http://localhost:4000');
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const [selectedTool, setSelectedTool] = useState<Tool>('pen');
   const [color, setColor] = useState('#000000');
   const [brushSize, setBrushSize] = useState(5);
@@ -16,6 +17,11 @@ const Whiteboard = ({ user }) => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [shapes, setShapes] = useState<any[]>([]);
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
+  const [pdfScale, setPdfScale] = useState(1);
+  const [pdfPosition, setPdfPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const tools = [
     { id: 'pen', icon: Pencil, label: 'Pen' },
@@ -24,22 +30,13 @@ const Whiteboard = ({ user }) => {
     { id: 'rectangle', icon: Square, label: 'Rectangle' },
     { id: 'circle', icon: Circle, label: 'Circle' },
     { id: 'triangle', icon: Triangle, label: 'Triangle' },
+    { id: 'move', icon: Move, label: 'Move PDF' },
   ];
 
   const colors = [
     '#000000', '#FF0000', '#00FF00', '#0000FF', '#FFFF00', 
     '#FF00FF', '#00FFFF', '#FFA500', '#800080', '#008000'
   ];
-
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file && file.type === 'application/pdf') {
-      const url = URL.createObjectURL(file);
-      setPdfUrl(url);
-    } else {
-      alert('Please upload a PDF file');
-    }
-  };
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -92,6 +89,8 @@ const Whiteboard = ({ user }) => {
   };
 
   const startDrawing = (e: React.MouseEvent) => {
+    if (selectedTool === 'move' && pdfUrl) return;
+
     const canvas = canvasRef.current;
     const rect = canvas?.getBoundingClientRect();
     const x = e.clientX - (rect?.left || 0);
@@ -114,7 +113,7 @@ const Whiteboard = ({ user }) => {
   };
 
   const draw = (e: React.MouseEvent) => {
-    if (!isDrawing) return;
+    if (!isDrawing || selectedTool === 'move') return;
     
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
@@ -171,7 +170,7 @@ const Whiteboard = ({ user }) => {
   };
 
   const finishDrawing = (e: React.MouseEvent) => {
-    if (!isDrawing) return;
+    if (!isDrawing || selectedTool === 'move') return;
     setIsDrawing(false);
 
     const canvas = canvasRef.current;
@@ -203,6 +202,91 @@ const Whiteboard = ({ user }) => {
     ctx.clearRect(0, 0, canvas!.width, canvas!.height);
     setShapes([]);
     socket.emit('clear');
+  };
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file && file.type === 'application/pdf') {
+      const url = URL.createObjectURL(file);
+      setPdfUrl(url);
+      setPdfPosition({ x: 0, y: 0 });
+      setPdfScale(1);
+      setCurrentPage(1);
+      
+      const tempIframe = document.createElement('iframe');
+      tempIframe.src = url;
+      tempIframe.style.display = 'none';
+      document.body.appendChild(tempIframe);
+      
+      tempIframe.onload = () => {
+        try {
+          const doc = tempIframe.contentWindow?.document;
+          const pageCount = doc?.querySelector('embed[type="application/pdf"]')?.getAttribute('data-page-count');
+          if (pageCount) {
+            setTotalPages(parseInt(pageCount));
+          }
+        } finally {
+          document.body.removeChild(tempIframe);
+        }
+      };
+    } else {
+      alert('Please upload a PDF file');
+    }
+  };
+
+  const handleZoom = (direction: 'in' | 'out') => {
+    setPdfScale(prevScale => {
+      const newScale = direction === 'in' ? prevScale * 1.1 : prevScale / 1.1;
+      return Math.min(Math.max(0.5, newScale), 3);
+    });
+  };
+
+  const handlePageChange = (direction: 'up' | 'down') => {
+    setCurrentPage(prev => {
+      const newPage = direction === 'up' ? prev - 1 : prev + 1;
+      return Math.min(Math.max(1, newPage), totalPages);
+    });
+  };
+
+  const handlePdfScroll = (e: React.WheelEvent) => {
+    if (selectedTool === 'move') {
+      e.preventDefault();
+      setPdfPosition(prev => ({
+        x: prev.x,
+        y: prev.y - e.deltaY,
+      }));
+    }
+  };
+
+  const handlePdfMouseDown = (e: React.MouseEvent) => {
+    if (selectedTool === 'move' && pdfUrl) {
+      setIsDragging(true);
+      setStartPos({
+        x: e.clientX - pdfPosition.x,
+        y: e.clientY - pdfPosition.y
+      });
+    } else {
+      startDrawing(e);
+    }
+  };
+
+  const handlePdfMouseMove = (e: React.MouseEvent) => {
+    if (isDragging && selectedTool === 'move') {
+      setPdfPosition({
+        x: e.clientX - startPos.x,
+        y: e.clientY - startPos.y
+      });
+    } else {
+      draw(e);
+    }
+  };
+
+  const handlePdfMouseUp = (e: React.MouseEvent) => {
+    if (isDragging) {
+      setIsDragging(false);
+    } else {
+      finishDrawing(e);
+    }
   };
 
   useEffect(() => {
@@ -287,7 +371,46 @@ const Whiteboard = ({ user }) => {
         </div>
 
         <div className="space-y-2">
-          <h3 className="font-medium text-gray-700">Upload PDF</h3>
+          <h3 className="font-medium text-gray-700">PDF Controls</h3>
+          <div className="flex gap-2">
+            <button
+              onClick={() => handleZoom('in')}
+              className="flex-1 flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+            >
+              <ZoomIn className="h-4 w-4" />
+              Zoom In
+            </button>
+            <button
+              onClick={() => handleZoom('out')}
+              className="flex-1 flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors"
+            >
+              <ZoomOut className="h-4 w-4" />
+              Zoom Out
+            </button>
+          </div>
+          {pdfUrl && (
+            <div className="flex items-center justify-between gap-2 mt-2">
+              <button
+                onClick={() => handlePageChange('up')}
+                disabled={currentPage <= 1}
+                className="flex-1 flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50"
+              >
+                <ChevronUp className="h-4 w-4" />
+                Previous
+              </button>
+              <span className="text-sm text-gray-600">
+                {currentPage}/{totalPages}
+              </span>
+              <button
+                onClick={() => handlePageChange('down')}
+                disabled={currentPage >= totalPages}
+                className="flex-1 flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors disabled:opacity-50"
+              >
+                <ChevronDown className="h-4 w-4" />
+                Next
+              </button>
+            </div>
+          )}
           <input
             type="file"
             ref={fileInputRef}
@@ -312,22 +435,40 @@ const Whiteboard = ({ user }) => {
         </button>
       </div>
 
-      <div className="flex-1 relative">
+      <div 
+        className="flex-1 relative overflow-hidden"
+        onMouseDown={handlePdfMouseDown}
+        onMouseMove={handlePdfMouseMove}
+        onMouseUp={handlePdfMouseUp}
+        onMouseLeave={handlePdfMouseUp}
+        onWheel={handlePdfScroll}
+      >
         {pdfUrl && (
-          <iframe
-            src={pdfUrl}
-            className="absolute inset-0 w-full h-full"
-            style={{ zIndex: 10 }}
-          />
+          <div
+            className="absolute inset-0"
+            style={{
+              transform: `translate(${pdfPosition.x}px, ${pdfPosition.y}px) scale(${pdfScale})`,
+              transformOrigin: 'center',
+              transition: isDragging ? 'none' : 'transform 0.2s ease-out',
+            }}
+          >
+            <iframe
+              ref={iframeRef}
+              src={`${pdfUrl}#page=${currentPage}`}
+              className="w-full h-full"
+              style={{ 
+                pointerEvents: selectedTool === 'move' ? 'none' : 'auto',
+              }}
+            />
+          </div>
         )}
         <canvas
           ref={canvasRef}
-          className="absolute inset-0 w-full h-full cursor-crosshair"
-          style={{ zIndex: 20 }}
-          onMouseDown={startDrawing}
-          onMouseMove={draw}
-          onMouseUp={finishDrawing}
-          onMouseOut={finishDrawing}
+          className="absolute inset-0 w-full h-full"
+          style={{ 
+            zIndex: 20,
+            cursor: selectedTool === 'move' ? 'move' : 'crosshair'
+          }}
         />
       </div>
     </div>
