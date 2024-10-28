@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import Features from './components/Features';
 import Curriculum from './components/Curriculum';
 import Whiteboard from './components/Whiteboard';
+import Whiteboardpart from './components/Whiteboardpart';
 import CallToAction from './components/CallToAction';
 import GetStarted from './components/GetStarted';
 import ClassBoardSelector from './components/ClassBoardSelector';
@@ -27,6 +28,7 @@ function App() {
               <Hero />
               <Features />
               <Curriculum />
+              <Whiteboardpart user={user} />
               <CallToAction />
             </div>
           } />
