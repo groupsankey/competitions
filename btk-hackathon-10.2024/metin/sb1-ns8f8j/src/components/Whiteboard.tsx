@@ -5,6 +5,14 @@ import { Square, Circle, Triangle, Type, Pencil, Eraser, FileUp, ZoomIn, ZoomOut
 type Tool = 'pen' | 'eraser' | 'text' | 'rectangle' | 'circle' | 'triangle' | 'move' | 'interact';
 type DrawingMode = 'free' | 'shape';
 
+interface DrawingPoint {
+  x: number;
+  y: number;
+  color: string;
+  size: number;
+  type: 'draw' | 'erase';
+}
+
 const Whiteboard = ({ user }) => {
   const socket = io('http://localhost:4000');
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -22,6 +30,7 @@ const Whiteboard = ({ user }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [drawingHistory, setDrawingHistory] = useState<DrawingPoint[]>([]);
 
   const tools = [
     { id: 'pen', icon: Pencil, label: 'Pen' },
@@ -31,7 +40,7 @@ const Whiteboard = ({ user }) => {
     { id: 'circle', icon: Circle, label: 'Circle' },
     { id: 'triangle', icon: Triangle, label: 'Triangle' },
     { id: 'move', icon: Move, label: 'Move PDF' },
-    { id: 'interact', icon: Hand, label: 'Interact PDF' },
+    { id: 'interact', icon: Hand, label: 'Interact with PDF' },
   ];
 
   const colors = [
@@ -47,7 +56,7 @@ const Whiteboard = ({ user }) => {
       if (canvas) {
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
-        redrawShapes();
+        redrawCanvas();
       }
     };
 
@@ -57,36 +66,37 @@ const Whiteboard = ({ user }) => {
     return () => window.removeEventListener('resize', resizeCanvas);
   }, []);
 
-  const redrawShapes = () => {
+  const redrawCanvas = () => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
     if (!ctx) return;
 
     ctx.clearRect(0, 0, canvas!.width, canvas!.height);
+    
+    // Redraw all points
+    drawingHistory.forEach((point, index) => {
+      if (index === 0 || drawingHistory[index - 1].type !== point.type) {
+        ctx.beginPath();
+        ctx.moveTo(point.x, point.y);
+      }
+      
+      if (point.type === 'draw') {
+        ctx.strokeStyle = point.color;
+        ctx.lineWidth = point.size;
+        ctx.lineTo(point.x, point.y);
+        ctx.stroke();
+      } else if (point.type === 'erase') {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+        ctx.lineWidth = point.size;
+        ctx.lineTo(point.x, point.y);
+        ctx.stroke();
+        ctx.globalCompositeOperation = 'source-over';
+      }
+    });
+
+    // Redraw shapes
     shapes.forEach(shape => drawShape(ctx, shape));
-  };
-
-  const drawShape = (ctx: CanvasRenderingContext2D, shape: any) => {
-    ctx.beginPath();
-    ctx.strokeStyle = shape.color;
-    ctx.lineWidth = shape.size;
-
-    switch (shape.type) {
-      case 'rectangle':
-        ctx.rect(shape.x, shape.y, shape.width, shape.height);
-        break;
-      case 'circle':
-        ctx.arc(shape.x + shape.width/2, shape.y + shape.height/2, 
-          Math.min(Math.abs(shape.width), Math.abs(shape.height))/2, 0, Math.PI * 2);
-        break;
-      case 'triangle':
-        ctx.moveTo(shape.x + shape.width/2, shape.y);
-        ctx.lineTo(shape.x + shape.width, shape.y + shape.height);
-        ctx.lineTo(shape.x, shape.y + shape.height);
-        ctx.closePath();
-        break;
-    }
-    ctx.stroke();
   };
 
   const startDrawing = (e: React.MouseEvent) => {
@@ -106,10 +116,26 @@ const Whiteboard = ({ user }) => {
 
       ctx.beginPath();
       ctx.moveTo(x, y);
-      ctx.strokeStyle = selectedTool === 'eraser' ? '#FFFFFF' : color;
+      
+      if (selectedTool === 'eraser') {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = color;
+      }
+      
       ctx.lineWidth = brushSize;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
+
+      setDrawingHistory(prev => [...prev, {
+        x,
+        y,
+        color: selectedTool === 'pen' ? color : 'rgba(0,0,0,1)',
+        size: brushSize,
+        type: selectedTool === 'pen' ? 'draw' : 'erase'
+      }]);
     }
   };
 
@@ -125,8 +151,24 @@ const Whiteboard = ({ user }) => {
     const y = e.clientY - (rect?.top || 0);
 
     if (selectedTool === 'pen' || selectedTool === 'eraser') {
+      if (selectedTool === 'eraser') {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = color;
+      }
+
       ctx.lineTo(x, y);
       ctx.stroke();
+
+      setDrawingHistory(prev => [...prev, {
+        x,
+        y,
+        color: selectedTool === 'pen' ? color : 'rgba(0,0,0,1)',
+        size: brushSize,
+        type: selectedTool === 'pen' ? 'draw' : 'erase'
+      }]);
 
       socket.emit('draw', {
         type: 'free',
@@ -135,11 +177,11 @@ const Whiteboard = ({ user }) => {
         x1: x,
         y1: y,
         tool: selectedTool,
-        color: selectedTool === 'eraser' ? '#FFFFFF' : color,
+        color: selectedTool === 'pen' ? color : 'rgba(0,0,0,1)',
         size: brushSize
       });
     } else {
-      redrawShapes();
+      redrawCanvas();
       drawPreviewShape(ctx, x, y);
     }
   };
@@ -195,16 +237,6 @@ const Whiteboard = ({ user }) => {
     }
   };
 
-  const clearCanvas = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
-    if (!ctx) return;
-    
-    ctx.clearRect(0, 0, canvas!.width, canvas!.height);
-    setShapes([]);
-    socket.emit('clear');
-  };
-
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && file.type === 'application/pdf') {
@@ -250,35 +282,34 @@ const Whiteboard = ({ user }) => {
   };
 
   const handlePdfScroll = (e: React.WheelEvent) => {
-    if (selectedTool === 'move') {
+    if (selectedTool === 'interact') {
       e.preventDefault();
       setPdfPosition(prev => ({
         x: prev.x,
         y: prev.y - e.deltaY,
       }));
     }
-    // Allow natural scrolling when in interact mode
   };
 
   const handlePdfMouseDown = (e: React.MouseEvent) => {
-    if (selectedTool === 'move' && pdfUrl) {
+    if ((selectedTool === 'move' || selectedTool === 'interact') && pdfUrl) {
       setIsDragging(true);
       setStartPos({
         x: e.clientX - pdfPosition.x,
         y: e.clientY - pdfPosition.y
       });
-    } else if (selectedTool !== 'interact') {
+    } else {
       startDrawing(e);
     }
   };
 
   const handlePdfMouseMove = (e: React.MouseEvent) => {
-    if (isDragging && selectedTool === 'move') {
+    if (isDragging && (selectedTool === 'move' || selectedTool === 'interact')) {
       setPdfPosition({
         x: e.clientX - startPos.x,
         y: e.clientY - startPos.y
       });
-    } else if (selectedTool !== 'interact') {
+    } else {
       draw(e);
     }
   };
@@ -286,9 +317,20 @@ const Whiteboard = ({ user }) => {
   const handlePdfMouseUp = (e: React.MouseEvent) => {
     if (isDragging) {
       setIsDragging(false);
-    } else if (selectedTool !== 'interact') {
+    } else {
       finishDrawing(e);
     }
+  };
+
+  const clearCanvas = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext('2d');
+    if (!ctx) return;
+    
+    ctx.clearRect(0, 0, canvas!.width, canvas!.height);
+    setShapes([]);
+    setDrawingHistory([]);
+    socket.emit('clear');
   };
 
   useEffect(() => {
@@ -305,7 +347,16 @@ const Whiteboard = ({ user }) => {
         ctx.lineWidth = data.size;
         ctx.lineCap = 'round';
         ctx.lineJoin = 'round';
+        
+        if (data.tool === 'eraser') {
+          ctx.globalCompositeOperation = 'destination-out';
+        }
+        
         ctx.stroke();
+        
+        if (data.tool === 'eraser') {
+          ctx.globalCompositeOperation = 'source-over';
+        }
       } else {
         setShapes(prevShapes => [...prevShapes, data]);
         drawShape(ctx, data);
@@ -319,6 +370,29 @@ const Whiteboard = ({ user }) => {
       socket.off('clear');
     };
   }, [socket]);
+
+  const drawShape = (ctx: CanvasRenderingContext2D, shape: any) => {
+    ctx.beginPath();
+    ctx.strokeStyle = shape.color;
+    ctx.lineWidth = shape.size;
+
+    switch (shape.type) {
+      case 'rectangle':
+        ctx.rect(shape.x, shape.y, shape.width, shape.height);
+        break;
+      case 'circle':
+        ctx.arc(shape.x + shape.width/2, shape.y + shape.height/2, 
+          Math.min(Math.abs(shape.width), Math.abs(shape.height))/2, 0, Math.PI * 2);
+        break;
+      case 'triangle':
+        ctx.moveTo(shape.x + shape.width/2, shape.y);
+        ctx.lineTo(shape.x + shape.width, shape.y + shape.height);
+        ctx.lineTo(shape.x, shape.y + shape.height);
+        ctx.closePath();
+        break;
+    }
+    ctx.stroke();
+  };
 
   return (
     <div className="flex h-screen">
@@ -449,7 +523,7 @@ const Whiteboard = ({ user }) => {
           <div
             className="absolute inset-0"
             style={{
-              transform: selectedTool === 'move' ? `translate(${pdfPosition.x}px, ${pdfPosition.y}px) scale(${pdfScale})` : 'none',
+              transform: `translate(${pdfPosition.x}px, ${pdfPosition.y}px) scale(${pdfScale})`,
               transformOrigin: 'center',
               transition: isDragging ? 'none' : 'transform 0.2s ease-out',
               pointerEvents: selectedTool === 'interact' ? 'auto' : 'none',
@@ -474,7 +548,9 @@ const Whiteboard = ({ user }) => {
               ? 'move' 
               : selectedTool === 'interact' 
                 ? 'default'
-                : 'crosshair',
+                : selectedTool === 'eraser'
+                  ? 'crosshair'
+                  : 'crosshair',
             pointerEvents: selectedTool === 'interact' ? 'none' : 'auto',
           }}
         />
