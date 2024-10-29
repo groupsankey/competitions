@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { io } from 'socket.io-client';
-import { Square, Circle, Triangle, Type, Pencil, Eraser, FileUp, ZoomIn, ZoomOut, Move, ChevronUp, ChevronDown } from 'lucide-react';
+import { Square, Circle, Triangle, Type, Pencil, Eraser, FileUp, ZoomIn, ZoomOut, Move, ChevronUp, ChevronDown, Hand } from 'lucide-react';
 
-type Tool = 'pen' | 'eraser' | 'text' | 'rectangle' | 'circle' | 'triangle' | 'move';
+type Tool = 'pen' | 'eraser' | 'text' | 'rectangle' | 'circle' | 'triangle' | 'move' | 'interact';
 type DrawingMode = 'free' | 'shape';
 
 const Whiteboard = ({ user }) => {
@@ -31,6 +31,7 @@ const Whiteboard = ({ user }) => {
     { id: 'circle', icon: Circle, label: 'Circle' },
     { id: 'triangle', icon: Triangle, label: 'Triangle' },
     { id: 'move', icon: Move, label: 'Move PDF' },
+    { id: 'interact', icon: Hand, label: 'Interact PDF' },
   ];
 
   const colors = [
@@ -89,7 +90,7 @@ const Whiteboard = ({ user }) => {
   };
 
   const startDrawing = (e: React.MouseEvent) => {
-    if (selectedTool === 'move' && pdfUrl) return;
+    if (selectedTool === 'move' || selectedTool === 'interact') return;
 
     const canvas = canvasRef.current;
     const rect = canvas?.getBoundingClientRect();
@@ -113,7 +114,7 @@ const Whiteboard = ({ user }) => {
   };
 
   const draw = (e: React.MouseEvent) => {
-    if (!isDrawing || selectedTool === 'move') return;
+    if (!isDrawing || selectedTool === 'move' || selectedTool === 'interact') return;
     
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
@@ -170,7 +171,7 @@ const Whiteboard = ({ user }) => {
   };
 
   const finishDrawing = (e: React.MouseEvent) => {
-    if (!isDrawing || selectedTool === 'move') return;
+    if (!isDrawing || selectedTool === 'move' || selectedTool === 'interact') return;
     setIsDrawing(false);
 
     const canvas = canvasRef.current;
@@ -256,6 +257,7 @@ const Whiteboard = ({ user }) => {
         y: prev.y - e.deltaY,
       }));
     }
+    // Allow natural scrolling when in interact mode
   };
 
   const handlePdfMouseDown = (e: React.MouseEvent) => {
@@ -265,7 +267,7 @@ const Whiteboard = ({ user }) => {
         x: e.clientX - pdfPosition.x,
         y: e.clientY - pdfPosition.y
       });
-    } else {
+    } else if (selectedTool !== 'interact') {
       startDrawing(e);
     }
   };
@@ -276,7 +278,7 @@ const Whiteboard = ({ user }) => {
         x: e.clientX - startPos.x,
         y: e.clientY - startPos.y
       });
-    } else {
+    } else if (selectedTool !== 'interact') {
       draw(e);
     }
   };
@@ -284,7 +286,7 @@ const Whiteboard = ({ user }) => {
   const handlePdfMouseUp = (e: React.MouseEvent) => {
     if (isDragging) {
       setIsDragging(false);
-    } else {
+    } else if (selectedTool !== 'interact') {
       finishDrawing(e);
     }
   };
@@ -447,9 +449,10 @@ const Whiteboard = ({ user }) => {
           <div
             className="absolute inset-0"
             style={{
-              transform: `translate(${pdfPosition.x}px, ${pdfPosition.y}px) scale(${pdfScale})`,
+              transform: selectedTool === 'move' ? `translate(${pdfPosition.x}px, ${pdfPosition.y}px) scale(${pdfScale})` : 'none',
               transformOrigin: 'center',
               transition: isDragging ? 'none' : 'transform 0.2s ease-out',
+              pointerEvents: selectedTool === 'interact' ? 'auto' : 'none',
             }}
           >
             <iframe
@@ -457,7 +460,7 @@ const Whiteboard = ({ user }) => {
               src={`${pdfUrl}#page=${currentPage}`}
               className="w-full h-full"
               style={{ 
-                pointerEvents: selectedTool === 'move' ? 'none' : 'auto',
+                pointerEvents: selectedTool === 'interact' ? 'auto' : 'none',
               }}
             />
           </div>
@@ -466,8 +469,13 @@ const Whiteboard = ({ user }) => {
           ref={canvasRef}
           className="absolute inset-0 w-full h-full"
           style={{ 
-            zIndex: 20,
-            cursor: selectedTool === 'move' ? 'move' : 'crosshair'
+            zIndex: selectedTool === 'interact' ? 0 : 20,
+            cursor: selectedTool === 'move' 
+              ? 'move' 
+              : selectedTool === 'interact' 
+                ? 'default'
+                : 'crosshair',
+            pointerEvents: selectedTool === 'interact' ? 'none' : 'auto',
           }}
         />
       </div>
