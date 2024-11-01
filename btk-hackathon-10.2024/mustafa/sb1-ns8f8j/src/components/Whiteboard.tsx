@@ -31,6 +31,7 @@ const Whiteboard = ({ user }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [drawingHistory, setDrawingHistory] = useState<DrawingPoint[]>([]);
+  const lastDrawnPoint = useRef<{ x: number; y: number } | null>(null);
 
   const tools = [
     { id: 'pen', icon: Pencil, label: 'Pen' },
@@ -54,8 +55,9 @@ const Whiteboard = ({ user }) => {
     
     const resizeCanvas = () => {
       if (canvas) {
-        canvas.width = canvas.offsetWidth;
-        canvas.height = canvas.offsetHeight;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
         redrawCanvas();
       }
     };
@@ -73,7 +75,6 @@ const Whiteboard = ({ user }) => {
 
     ctx.clearRect(0, 0, canvas!.width, canvas!.height);
     
-    // Redraw all points
     drawingHistory.forEach((point, index) => {
       if (index === 0 || drawingHistory[index - 1].type !== point.type) {
         ctx.beginPath();
@@ -95,27 +96,37 @@ const Whiteboard = ({ user }) => {
       }
     });
 
-    // Redraw shapes
     shapes.forEach(shape => drawShape(ctx, shape));
+  };
+
+  const getCanvasPoint = (clientX: number, clientY: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return { x: 0, y: 0 };
+    
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    
+    return {
+      x: (clientX - rect.left) * scaleX,
+      y: (clientY - rect.top) * scaleY
+    };
   };
 
   const startDrawing = (e: React.MouseEvent) => {
     if (selectedTool === 'move' || selectedTool === 'interact') return;
 
-    const canvas = canvasRef.current;
-    const rect = canvas?.getBoundingClientRect();
-    const x = e.clientX - (rect?.left || 0);
-    const y = e.clientY - (rect?.top || 0);
-
+    const point = getCanvasPoint(e.clientX, e.clientY);
     setIsDrawing(true);
-    setStartPos({ x, y });
+    setStartPos(point);
+    lastDrawnPoint.current = point;
 
     if (selectedTool === 'pen' || selectedTool === 'eraser') {
-      const ctx = canvas?.getContext('2d');
+      const ctx = canvasRef.current?.getContext('2d');
       if (!ctx) return;
 
       ctx.beginPath();
-      ctx.moveTo(x, y);
+      ctx.moveTo(point.x, point.y);
       
       if (selectedTool === 'eraser') {
         ctx.globalCompositeOperation = 'destination-out';
@@ -130,8 +141,8 @@ const Whiteboard = ({ user }) => {
       ctx.lineJoin = 'round';
 
       setDrawingHistory(prev => [...prev, {
-        x,
-        y,
+        x: point.x,
+        y: point.y,
         color: selectedTool === 'pen' ? color : 'rgba(0,0,0,1)',
         size: brushSize,
         type: selectedTool === 'pen' ? 'draw' : 'erase'
@@ -142,13 +153,9 @@ const Whiteboard = ({ user }) => {
   const draw = (e: React.MouseEvent) => {
     if (!isDrawing || selectedTool === 'move' || selectedTool === 'interact') return;
     
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext('2d');
-    if (!ctx) return;
-
-    const rect = canvas?.getBoundingClientRect();
-    const x = e.clientX - (rect?.left || 0);
-    const y = e.clientY - (rect?.top || 0);
+    const point = getCanvasPoint(e.clientX, e.clientY);
+    const ctx = canvasRef.current?.getContext('2d');
+    if (!ctx || !lastDrawnPoint.current) return;
 
     if (selectedTool === 'pen' || selectedTool === 'eraser') {
       if (selectedTool === 'eraser') {
@@ -159,30 +166,34 @@ const Whiteboard = ({ user }) => {
         ctx.strokeStyle = color;
       }
 
-      ctx.lineTo(x, y);
+      ctx.beginPath();
+      ctx.moveTo(lastDrawnPoint.current.x, lastDrawnPoint.current.y);
+      ctx.lineTo(point.x, point.y);
       ctx.stroke();
 
+      socket.emit('draw', {
+        type: 'free',
+        x0: lastDrawnPoint.current.x / canvasRef.current!.width,
+        y0: lastDrawnPoint.current.y / canvasRef.current!.height,
+        x1: point.x / canvasRef.current!.width,
+        y1: point.y / canvasRef.current!.height,
+        tool: selectedTool,
+        color: selectedTool === 'pen' ? color : 'rgba(0,0,0,1)',
+        size: brushSize
+      });
+
       setDrawingHistory(prev => [...prev, {
-        x,
-        y,
+        x: point.x,
+        y: point.y,
         color: selectedTool === 'pen' ? color : 'rgba(0,0,0,1)',
         size: brushSize,
         type: selectedTool === 'pen' ? 'draw' : 'erase'
       }]);
 
-      socket.emit('draw', {
-        type: 'free',
-        x0: startPos.x,
-        y0: startPos.y,
-        x1: x,
-        y1: y,
-        tool: selectedTool,
-        color: selectedTool === 'pen' ? color : 'rgba(0,0,0,1)',
-        size: brushSize
-      });
+      lastDrawnPoint.current = point;
     } else {
       redrawCanvas();
-      drawPreviewShape(ctx, x, y);
+      drawPreviewShape(ctx, point.x, point.y);
     }
   };
 
@@ -216,18 +227,14 @@ const Whiteboard = ({ user }) => {
     if (!isDrawing || selectedTool === 'move' || selectedTool === 'interact') return;
     setIsDrawing(false);
 
-    const canvas = canvasRef.current;
-    const rect = canvas?.getBoundingClientRect();
-    const endX = e.clientX - (rect?.left || 0);
-    const endY = e.clientY - (rect?.top || 0);
-
+    const point = getCanvasPoint(e.clientX, e.clientY);
     if (selectedTool !== 'pen' && selectedTool !== 'eraser') {
       const newShape = {
         type: selectedTool,
-        x: startPos.x,
-        y: startPos.y,
-        width: endX - startPos.x,
-        height: endY - startPos.y,
+        x: startPos.x / canvasRef.current!.width,
+        y: startPos.y / canvasRef.current!.height,
+        width: (point.x - startPos.x) / canvasRef.current!.width,
+        height: (point.y - startPos.y) / canvasRef.current!.height,
         color,
         size: brushSize
       };
@@ -341,8 +348,8 @@ const Whiteboard = ({ user }) => {
 
       if (data.type === 'free') {
         ctx.beginPath();
-        ctx.moveTo(data.x0, data.y0);
-        ctx.lineTo(data.x1, data.y1);
+        ctx.moveTo(data.x0 * canvas.width, data.y0 * canvas.height);
+        ctx.lineTo(data.x1 * canvas.width, data.y1 * canvas.height);
         ctx.strokeStyle = data.color;
         ctx.lineWidth = data.size;
         ctx.lineCap = 'round';
@@ -350,6 +357,8 @@ const Whiteboard = ({ user }) => {
         
         if (data.tool === 'eraser') {
           ctx.globalCompositeOperation = 'destination-out';
+        } else {
+          ctx.globalCompositeOperation = 'source-over';
         }
         
         ctx.stroke();
@@ -358,8 +367,15 @@ const Whiteboard = ({ user }) => {
           ctx.globalCompositeOperation = 'source-over';
         }
       } else {
-        setShapes(prevShapes => [...prevShapes, data]);
-        drawShape(ctx, data);
+        const normalizedShape = {
+          ...data,
+          x: data.x * canvas.width,
+          y: data.y * canvas.height,
+          width: data.width * canvas.width,
+          height: data.height * canvas.height
+        };
+        setShapes(prevShapes => [...prevShapes, normalizedShape]);
+        drawShape(ctx, normalizedShape);
       }
     });
 
