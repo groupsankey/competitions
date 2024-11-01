@@ -1,83 +1,13 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import Plot from 'react-plotly.js';
+import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import { evaluate } from 'mathjs';
-
-interface Graph2DProps {
-  equation: string;
-  xRange: [number, number];
-}
 
 interface Graph3DProps {
   equation: string;
   xRange: [number, number];
   yRange: [number, number];
 }
-
-const Graph2D: React.FC<Graph2DProps> = ({ equation, xRange }) => {
-  const data = useMemo(() => {
-    const points = 1000; // Reduced points for better performance
-    const x = Array.from({ length: points }, (_, i) => 
-      xRange[0] + (i * (xRange[1] - xRange[0])) / (points - 1)
-    );
-    
-    const y = x.map(xVal => {
-      try {
-        return evaluate(equation, { x: xVal });
-      } catch {
-        return null;
-      }
-    });
-
-    return [{ x, y, type: 'scatter', mode: 'lines', name: equation }];
-  }, [equation, xRange]);
-
-  return (
-    <Plot
-      data={data}
-      layout={{
-        title: '2D Graph',
-        xaxis: { 
-          title: 'x',
-          gridcolor: '#f0f0f0',
-          zerolinecolor: '#e0e0e0',
-          autorange: true,
-          range: [-10, 10]
-        },
-        yaxis: { 
-          title: 'y',
-          gridcolor: '#f0f0f0',
-          zerolinecolor: '#e0e0e0',
-          autorange: true,
-          range: [-10, 10]
-        },
-        plot_bgcolor: '#ffffff',
-        paper_bgcolor: '#ffffff',
-        autosize: true,
-        height: 500,
-        margin: { l: 50, r: 50, t: 50, b: 50 },
-        showlegend: true,
-        hovermode: 'closest'
-      }}
-      useResizeHandler
-      className="w-full"
-      config={{
-        scrollZoom: true,
-        displayModeBar: true,
-        displaylogo: false,
-        modeBarButtonsToAdd: ['pan2d', 'zoomIn2d', 'zoomOut2d', 'autoScale2d'],
-        toImageButtonOptions: {
-          format: 'png',
-          filename: '2d_graph',
-          height: 1000,
-          width: 1000,
-          scale: 2
-        }
-      }}
-    />
-  );
-};
 
 const Graph3D: React.FC<Graph3DProps> = ({ equation, xRange, yRange }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -101,7 +31,7 @@ const Graph3D: React.FC<Graph3DProps> = ({ equation, xRange, yRange }) => {
       powerPreference: 'high-performance'
     });
     renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // Limit pixel ratio for performance
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     containerRef.current.appendChild(renderer.domElement);
 
@@ -110,20 +40,16 @@ const Graph3D: React.FC<Graph3DProps> = ({ equation, xRange, yRange }) => {
     controls.dampingFactor = 0.05;
     controls.screenSpacePanning = true;
     controls.maxDistance = Infinity;
+    controls.minDistance = 0.1;
     controls.autoRotate = true;
     controls.autoRotateSpeed = 0.5;
     controls.enableZoom = true;
     controls.zoomSpeed = 1.5;
 
-    // Optimized surface generation
     const generateSurface = () => {
-      const resolution = 100; // Reduced resolution for better performance
+      const resolution = 150;
       const geometry = new THREE.BufferGeometry();
-      const vertices = [];
-      const indices = [];
-      const colors = [];
 
-      // Use TypedArrays for better performance
       const verticesArray = new Float32Array(resolution * resolution * 3);
       const colorsArray = new Float32Array(resolution * resolution * 3);
       let vertexIndex = 0;
@@ -157,7 +83,6 @@ const Graph3D: React.FC<Graph3DProps> = ({ equation, xRange, yRange }) => {
         }
       }
 
-      // Optimized index generation
       const indexArray = new Uint32Array((resolution - 1) * (resolution - 1) * 6);
       let indexCount = 0;
       for (let i = 0; i < resolution - 1; i++) {
@@ -209,13 +134,13 @@ const Graph3D: React.FC<Graph3DProps> = ({ equation, xRange, yRange }) => {
     directionalLight2.position.set(-1, -1, -1);
     scene.add(directionalLight2);
 
-    const gridHelper = new THREE.GridHelper(50, 50, 0x888888, 0x888888);
+    const gridHelper = new THREE.GridHelper(200, 200, 0x888888, 0x888888);
     scene.add(gridHelper);
 
-    const axesHelper = new THREE.AxesHelper(25);
+    const axesHelper = new THREE.AxesHelper(100);
     scene.add(axesHelper);
 
-    camera.position.set(15, 15, 15);
+    camera.position.set(50, 50, 50);
     camera.lookAt(0, 0, 0);
 
     let frameId: number;
@@ -251,82 +176,4 @@ const Graph3D: React.FC<Graph3DProps> = ({ equation, xRange, yRange }) => {
   return <div ref={containerRef} className="w-full h-[600px]" />;
 };
 
-const GraphingCalculator: React.FC = () => {
-  const [equation2D, setEquation2D] = useState('sin(x)');
-  const [equation3D, setEquation3D] = useState('sin(sqrt(x^2 + y^2))');
-  const [mode, setMode] = useState<'2d' | '3d'>('3d');
-  const [xRange, setXRange] = useState<[number, number]>([-10, 10]);
-  const [yRange, setYRange] = useState<[number, number]>([-10, 10]);
-
-  const handleEquationChange = (e: React.ChangeEvent<HTMLInputElement>, is3D: boolean) => {
-    const value = e.target.value;
-    if (is3D) {
-      setEquation3D(value);
-    } else {
-      setEquation2D(value);
-    }
-  };
-
-  return (
-    <div className="p-6 bg-white rounded-xl shadow-lg mt-16">
-      <div className="mb-6 space-y-4">
-        <div className="bg-gray-50 p-6 rounded-xl">
-          {mode === '2d' ? (
-            <div className="space-y-4">
-              <label className="block text-sm font-medium text-gray-700">
-                2D Equation (use 'x' as variable)
-              </label>
-              <input
-                type="text"
-                value={equation2D}
-                onChange={(e) => handleEquationChange(e, false)}
-                className="w-full p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="e.g., sin(x), x^2, tan(x)"
-              />
-              <Graph2D equation={equation2D} xRange={xRange} />
-            </div>
-          ) : (
-            <div className="space-y-4">
-              <label className="block text-sm font-medium text-gray-700">
-                3D Equation (use 'x' and 'y' as variables)
-              </label>
-              <input
-                type="text"
-                value={equation3D}
-                onChange={(e) => handleEquationChange(e, true)}
-                className="w-full p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="e.g., sin(x) * cos(y), x^2 + y^2"
-              />
-              <Graph3D equation={equation3D} xRange={xRange} yRange={yRange} />
-            </div>
-          )}
-        </div>
-        
-        <div className="flex space-x-4 justify-center mt-6">
-          <button
-            onClick={() => setMode('2d')}
-            className={`px-6 py-3 rounded-lg transition-colors duration-200 font-medium ${
-              mode === '2d' 
-                ? 'bg-indigo-600 text-white shadow-lg' 
-                : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-            }`}
-          >
-            2D Graph
-          </button>
-          <button
-            onClick={() => setMode('3d')}
-            className={`px-6 py-3 rounded-lg transition-colors duration-200 font-medium ${
-              mode === '3d' 
-                ? 'bg-indigo-600 text-white shadow-lg' 
-                : 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-            }`}
-          >
-            3D Graph
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default GraphingCalculator;
+export default Graph3D;
