@@ -32,6 +32,10 @@ const Whiteboard = ({ user }) => {
   const [totalPages, setTotalPages] = useState(1);
   const [drawingHistory, setDrawingHistory] = useState<DrawingPoint[]>([]);
   const lastDrawnPoint = useRef<{ x: number; y: number } | null>(null);
+  const [sharedPdfUrl, setSharedPdfUrl] = useState<string | null>(null);
+  const [sharedPdfScale, setSharedPdfScale] = useState(1);
+  const [sharedPdfPosition, setSharedPdfPosition] = useState({ x: 0, y: 0 });
+  const [sharedCurrentPage, setSharedCurrentPage] = useState(1);
 
   const tools = [
     { id: 'pen', icon: Pencil, label: 'Pen' },
@@ -65,7 +69,72 @@ const Whiteboard = ({ user }) => {
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    return () => window.removeEventListener('resize', resizeCanvas);
+    socket.on('draw', (data) => {
+      const canvas = canvasRef.current;
+      const ctx = canvas?.getContext('2d');
+      if (!ctx) return;
+
+      if (data.type === 'free') {
+        ctx.beginPath();
+        ctx.moveTo(data.x0 * canvas.width, data.y0 * canvas.height);
+        ctx.lineTo(data.x1 * canvas.width, data.y1 * canvas.height);
+        ctx.strokeStyle = data.color;
+        ctx.lineWidth = data.size;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        
+        if (data.tool === 'eraser') {
+          ctx.globalCompositeOperation = 'destination-out';
+        } else {
+          ctx.globalCompositeOperation = 'source-over';
+        }
+        
+        ctx.stroke();
+        
+        if (data.tool === 'eraser') {
+          ctx.globalCompositeOperation = 'source-over';
+        }
+      } else {
+        const normalizedShape = {
+          ...data,
+          x: data.x * canvas.width,
+          y: data.y * canvas.height,
+          width: data.width * canvas.width,
+          height: data.height * canvas.height
+        };
+        setShapes(prevShapes => [...prevShapes, normalizedShape]);
+        drawShape(ctx, normalizedShape);
+      }
+    });
+
+    socket.on('pdfUploaded', (data) => {
+      const { url, scale, position, page } = data;
+      setSharedPdfUrl(url);
+      setSharedPdfScale(scale);
+      setSharedPdfPosition(position);
+      setSharedCurrentPage(page);
+      setPdfUrl(url);
+      setPdfScale(scale);
+      setPdfPosition(position);
+      setCurrentPage(page);
+    });
+
+    socket.on('pdfStateChanged', (data) => {
+      const { scale, position, page } = data;
+      setSharedPdfScale(scale);
+      setSharedPdfPosition(position);
+      setSharedCurrentPage(page);
+      setPdfScale(scale);
+      setPdfPosition(position);
+      setCurrentPage(page);
+    });
+
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      socket.off('draw');
+      socket.off('pdfUploaded');
+      socket.off('pdfStateChanged');
+    };
   }, []);
 
   const redrawCanvas = () => {
@@ -244,31 +313,43 @@ const Whiteboard = ({ user }) => {
     }
   };
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && file.type === 'application/pdf') {
-      const url = URL.createObjectURL(file);
-      setPdfUrl(url);
-      setPdfPosition({ x: 0, y: 0 });
-      setPdfScale(1);
-      setCurrentPage(1);
-      
-      const tempIframe = document.createElement('iframe');
-      tempIframe.src = url;
-      tempIframe.style.display = 'none';
-      document.body.appendChild(tempIframe);
-      
-      tempIframe.onload = () => {
-        try {
-          const doc = tempIframe.contentWindow?.document;
-          const pageCount = doc?.querySelector('embed[type="application/pdf"]')?.getAttribute('data-page-count');
-          if (pageCount) {
-            setTotalPages(parseInt(pageCount));
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const base64 = reader.result as string;
+        const url = URL.createObjectURL(file);
+        setPdfUrl(url);
+        setPdfPosition({ x: 0, y: 0 });
+        setPdfScale(1);
+        setCurrentPage(1);
+
+        socket.emit('pdfUpload', {
+          pdf: base64,
+          scale: 1,
+          position: { x: 0, y: 0 },
+          page: 1
+        });
+
+        const tempIframe = document.createElement('iframe');
+        tempIframe.src = url;
+        tempIframe.style.display = 'none';
+        document.body.appendChild(tempIframe);
+        
+        tempIframe.onload = () => {
+          try {
+            const doc = tempIframe.contentWindow?.document;
+            const pageCount = doc?.querySelector('embed[type="application/pdf"]')?.getAttribute('data-page-count');
+            if (pageCount) {
+              setTotalPages(parseInt(pageCount));
+            }
+          } finally {
+            document.body.removeChild(tempIframe);
           }
-        } finally {
-          document.body.removeChild(tempIframe);
-        }
+        };
       };
+      reader.readAsDataURL(file);
     } else {
       alert('Please upload a PDF file');
     }
@@ -277,24 +358,42 @@ const Whiteboard = ({ user }) => {
   const handleZoom = (direction: 'in' | 'out') => {
     setPdfScale(prevScale => {
       const newScale = direction === 'in' ? prevScale * 1.1 : prevScale / 1.1;
-      return Math.min(Math.max(0.5, newScale), 3);
+      const finalScale = Math.min(Math.max(0.5, newScale), 3);
+      socket.emit('pdfStateUpdate', {
+        scale: finalScale,
+        position: pdfPosition,
+        page: currentPage
+      });
+      return finalScale;
     });
   };
 
   const handlePageChange = (direction: 'up' | 'down') => {
     setCurrentPage(prev => {
       const newPage = direction === 'up' ? prev - 1 : prev + 1;
-      return Math.min(Math.max(1, newPage), totalPages);
+      const finalPage = Math.min(Math.max(1, newPage), totalPages);
+      socket.emit('pdfStateUpdate', {
+        scale: pdfScale,
+        position: pdfPosition,
+        page: finalPage
+      });
+      return finalPage;
     });
   };
 
   const handlePdfScroll = (e: React.WheelEvent) => {
     if (selectedTool === 'interact') {
       e.preventDefault();
-      setPdfPosition(prev => ({
-        x: prev.x,
-        y: prev.y - e.deltaY,
-      }));
+      const newPosition = {
+        x: pdfPosition.x,
+        y: pdfPosition.y - e.deltaY,
+      };
+      setPdfPosition(newPosition);
+      socket.emit('pdfStateUpdate', {
+        scale: pdfScale,
+        position: newPosition,
+        page: currentPage
+      });
     }
   };
 
@@ -312,9 +411,15 @@ const Whiteboard = ({ user }) => {
 
   const handlePdfMouseMove = (e: React.MouseEvent) => {
     if (isDragging && (selectedTool === 'move' || selectedTool === 'interact')) {
-      setPdfPosition({
+      const newPosition = {
         x: e.clientX - startPos.x,
         y: e.clientY - startPos.y
+      };
+      setPdfPosition(newPosition);
+      socket.emit('pdfStateUpdate', {
+        scale: pdfScale,
+        position: newPosition,
+        page: currentPage
       });
     } else {
       draw(e);
@@ -339,53 +444,6 @@ const Whiteboard = ({ user }) => {
     setDrawingHistory([]);
     socket.emit('clear');
   };
-
-  useEffect(() => {
-    socket.on('draw', (data) => {
-      const canvas = canvasRef.current;
-      const ctx = canvas?.getContext('2d');
-      if (!ctx) return;
-
-      if (data.type === 'free') {
-        ctx.beginPath();
-        ctx.moveTo(data.x0 * canvas.width, data.y0 * canvas.height);
-        ctx.lineTo(data.x1 * canvas.width, data.y1 * canvas.height);
-        ctx.strokeStyle = data.color;
-        ctx.lineWidth = data.size;
-        ctx.lineCap = 'round';
-        ctx.lineJoin = 'round';
-        
-        if (data.tool === 'eraser') {
-          ctx.globalCompositeOperation = 'destination-out';
-        } else {
-          ctx.globalCompositeOperation = 'source-over';
-        }
-        
-        ctx.stroke();
-        
-        if (data.tool === 'eraser') {
-          ctx.globalCompositeOperation = 'source-over';
-        }
-      } else {
-        const normalizedShape = {
-          ...data,
-          x: data.x * canvas.width,
-          y: data.y * canvas.height,
-          width: data.width * canvas.width,
-          height: data.height * canvas.height
-        };
-        setShapes(prevShapes => [...prevShapes, normalizedShape]);
-        drawShape(ctx, normalizedShape);
-      }
-    });
-
-    socket.on('clear', clearCanvas);
-
-    return () => {
-      socket.off('draw');
-      socket.off('clear');
-    };
-  }, [socket]);
 
   const drawShape = (ctx: CanvasRenderingContext2D, shape: any) => {
     ctx.beginPath();
