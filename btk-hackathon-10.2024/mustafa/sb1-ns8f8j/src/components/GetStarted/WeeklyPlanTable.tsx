@@ -1,79 +1,93 @@
 import React from 'react';
-import { Calendar, Book, Target, List, CheckCircle } from 'lucide-react';
-
-interface WeekData {
-  weekNum: string;
-  topics: string[];
-  objectives: string[];
-  activities: string[];
-  assessment: string[];
-}
+import { Calendar } from 'lucide-react';
 
 interface WeeklyPlanTableProps {
-  weeklyData: WeekData[];
+  weeklyContent: string[];
 }
 
-const WeeklyPlanTable: React.FC<WeeklyPlanTableProps> = ({ weeklyData }) => {
+const WeeklyPlanTable: React.FC<WeeklyPlanTableProps> = ({ weeklyContent }) => {
+  const parseWeekContent = (content: string) => {
+    const weekNumber = content.match(/Week (\d+)/)?.[1] || '';
+    const topics = content.match(/Topics:(.*?)(?=Objectives:|$)/s)?.[1]?.trim() || '';
+    const objectives = content.match(/Objectives:(.*?)(?=Activities:|$)/s)?.[1]?.trim() || '';
+    const activities = content.match(/Activities:(.*?)(?=Assessment:|$)/s)?.[1]?.trim() || '';
+    const assessment = content.match(/Assessment:(.*?)$/s)?.[1]?.trim() || '';
+
+    return {
+      weekNumber,
+      topics,
+      objectives,
+      activities,
+      assessment
+    };
+  };
+
   return (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
-        <thead>
-          <tr>
-            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Week
-            </th>
-            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Topics
-            </th>
-            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Objectives
-            </th>
-            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Activities
-            </th>
-            <th className="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-              Assessment
-            </th>
-          </tr>
-        </thead>
-        <tbody className="bg-white divide-y divide-gray-200">
-          {weeklyData.map((week, idx) => (
-            <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                Week {week.weekNum}
-              </td>
-              <td className="px-6 py-4">
-                <ul className="list-disc list-inside text-sm text-gray-700">
-                  {week.topics.map((topic, i) => (
-                    <li key={i}>{topic.replace(/^[•-]\s*/, '')}</li>
-                  ))}
-                </ul>
-              </td>
-              <td className="px-6 py-4">
-                <ul className="list-disc list-inside text-sm text-gray-700">
-                  {week.objectives.map((objective, i) => (
-                    <li key={i}>{objective.replace(/^[•-]\s*/, '')}</li>
-                  ))}
-                </ul>
-              </td>
-              <td className="px-6 py-4">
-                <ul className="list-disc list-inside text-sm text-gray-700">
-                  {week.activities.map((activity, i) => (
-                    <li key={i}>{activity.replace(/^[•-]\s*/, '')}</li>
-                  ))}
-                </ul>
-              </td>
-              <td className="px-6 py-4">
-                <ul className="list-disc list-inside text-sm text-gray-700">
-                  {week.assessment.map((item, i) => (
-                    <li key={i}>{item.replace(/^[•-]\s*/, '')}</li>
-                  ))}
-                </ul>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="mt-8 space-y-6">
+      {weeklyContent.map((weekContent, index) => {
+        const { weekNumber, topics, objectives, activities, assessment } = parseWeekContent(weekContent);
+        
+        return (
+          <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden">
+            <div className="bg-indigo-600 px-6 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Calendar className="h-6 w-6 text-indigo-100" />
+                <h3 className="text-xl font-bold text-white">Week {weekNumber}</h3>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-6 p-6">
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Topics</h4>
+                  <div className="text-gray-600">
+                    {topics.split('\n').map((topic, i) => (
+                      <div key={i} className="flex items-center gap-2 mb-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
+                        {topic.replace(/^[•-]\s*/, '')}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Learning Objectives</h4>
+                  <div className="text-gray-600">
+                    {objectives.split('\n').map((objective, i) => (
+                      <div key={i} className="flex items-center gap-2 mb-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
+                        {objective.replace(/^[•-]\s*/, '')}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Activities</h4>
+                  <div className="text-gray-600">
+                    {activities.split('\n').map((activity, i) => (
+                      <div key={i} className="flex items-center gap-2 mb-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                        {activity.replace(/^[•-]\s*/, '')}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900 mb-2">Assessment</h4>
+                  <div className="text-gray-600">
+                    {assessment.split('\n').map((item, i) => (
+                      <div key={i} className="flex items-center gap-2 mb-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-orange-400"></span>
+                        {item.replace(/^[•-]\s*/, '')}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 };
