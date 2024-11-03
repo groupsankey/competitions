@@ -1,0 +1,39 @@
+Proje Adı: Eğitimde Dijital İş Birliği Platformu – Öğrenci ve Öğretmen İçin Beyaz Sayfa Uzantısı
+
+Proje Amacı:
+
+Bu proje, eğitim süreçlerinde dijital dönüşümü desteklemek için tasarlanmış bir minimum viable product (MVP) niteliğindedir. Amacımız, öğretmen ve öğrencilerin ders içi ve dışı etkileşimlerini kolaylaştırmak, eğitimi daha erişilebilir ve verimli hale getirmektir. Öncelikli olarak öğretmen ve profesörlerle yürüttüğümüz saha çalışmaları sonucu, öğretmenlerin ihtiyaçlarına yönelik bir tasarım ortaya konulmuştur. Bu tasarım, uzaktan eğitim, hibrit eğitim ve yüz yüze ders ortamlarında öğrencilerle birlikte aktif öğrenme süreçlerini destekleyecek bir dijital platform sunmaktadır.
+
+Mevcut Durum ve İhtiyaç Analizi:
+
+Öğretmen ve öğrencilerin ders sırasında ve ders dışı saatlerde kolay erişilebilir, interaktif bir platforma ihtiyaç duydukları belirlenmiştir. Eğitimde dijital araçların eksikliği nedeniyle, özellikle uzaktan eğitimde eğitimcilerin öğrencilerle birebir etkileşim kurma ve ders takibini sağlama konularında sıkıntı yaşadığı gözlemlenmiştir. Çözüm olarak geliştirilen Beyaz Sayfa Uzantısı, kullanıcıların bir dijital beyaz tahta üzerinden interaktif ders işleyebilmesi, çizimler yapabilmesi ve gerçek zamanlı geri bildirim alabilmesi için tasarlanmıştır. Bu uygulama, eğitimcilerin ders içeriklerini düzenli ve sürdürülebilir bir şekilde öğrencilerine sunmalarını kolaylaştırmaktadır.
+
+Ana Hedefler:
+
+Öğretmen-Öğrenci İş Birliği: Öğretmenler ve öğrenciler arasında gerçek zamanlı bir beyaz tahta iş birliği ortamı oluşturmak.
+Ders İçeriklerini Dijital Ortama Taşıma: Eğitim içeriğinin dijital bir platform üzerinden interaktif olarak sunulmasını sağlamak.
+Kolay Kullanım ve Erişilebilirlik: Kullanıcıların farklı cihazlardan erişebileceği, hızlı ve etkili bir platform oluşturmak.
+Genişletilebilir Yapı: İleride ek özelliklerle daha da geliştirilebilecek şekilde bir altyapı sağlamak.
+Müfredat Uyumu: Farklı eğitim müfredatlarına uyum sağlayacak esnek bir sistem geliştirmek.
+Özellikler:
+
+İnteraktif Beyaz Tahta: Öğretmenler ve öğrenciler, dijital beyaz tahta üzerinde aynı anda çalışabilir, çizim yapabilir ve açıklamalar ekleyebilir. Bu özellik, ders sırasında öğrencinin çözüm yaparken öğretmenin anlık müdahale etmesine olanak tanır.
+
+Dijital Müfredat Desteği: SAT, IELTS, TOEFL ve Türk eğitim müfredatına uyumlu ders içerikleri ile farklı sınav ve programlara özel kazanımlar sunan bir müfredat desteği içerir.
+
+Gerçek Zamanlı İletişim: Socket.IO entegrasyonu ile beyaz tahta üzerinde yapılan tüm değişiklikler anında senkronize edilir.
+
+Öğrenci İlerleme Takibi: Öğrencinin gelişimini takip edebilmek için kişisel bir performans izleme sistemi içerir. Bu özellik, öğretmenlerin öğrencinin ilerlemesini izleyerek ihtiyaç duyulan konularda ekstra destek sağlamasına olanak tanır.
+
+Dijital Araçlar ve Şablonlar: Kare, dikdörtgen, daire gibi hazır şablonlar ve cetvel, açı ölçer gibi geometri araçları sayesinde öğretmen ve öğrencilerin şekil çizimleri daha kolay ve hatasız yapılır.
+
+Gemini API Entegrasyonu: Konu özetleri, kısa sorular ve öğrencinin zorluk seviyesine uygun öneriler sunarak, öğrenciye kişisel gelişim odaklı bir çalışma deneyimi sağlar.
+
+Proje Çıktıları:
+
+Geliştirilmiş Eğitim Etkileşimi: Öğrenciler ve öğretmenler arasında birebir etkileşim olanaklarının artırılması.
+Ders Takibinin Kolaylaştırılması: Öğretmen ve öğrencilerin beyaz tahta üzerinden ders sırasında etkin bir iletişim kurması ve öğrenci performansının izlenmesi.
+Uzaktan Eğitimi Destekleme: Hibrit ve uzaktan eğitim modellerinde dersin verimliliğini artıracak çözümler sunulması.
+Sonuç:
+
+Bu proje, eğitimde dijitalleşmeyi destekleyen yenilikçi bir araç olarak öğrencilerin ve öğretmenlerin ders süreçlerini daha verimli bir şekilde yönetmesine olanak tanır. Proje çıktıları, dijital eğitim araçlarının eksikliğinden kaynaklanan etkileşim sorunlarına çözüm sunmakta ve eğitimde bireysel başarıyı artırmayı hedeflemektedir.

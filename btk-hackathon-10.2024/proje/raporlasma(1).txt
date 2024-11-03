@@ -1,0 +1,137 @@
+bu yazılımın yalnızca bir minimum viable product olduğunu vurgula.
+biz öncelikle bu süreçte bir saha araştırması yaptık ve öğretmenlerimize ve profesörlerimize hem liseden hem de üniversiteden ihtiyaçlarını sorduk. 
+bu temelde tüm ihtiyaçlarını en verimli şekilde çözebilecek bir proje tasarladık.
+
+
+Key Features
+1. Interactive Whiteboard
+Real-time Collaboration: Allows students and teachers to collaborate on a digital whiteboard in real-time.
+Drawing Tools: Provides advanced drawing tools including a pencil, eraser, and shape tools (rectangle, circle, triangle).
+PDF Integration: Users can upload and interact with PDF documents, including zooming and scrolling functionalities.
+Clear Canvas: Option to clear the drawing area for a fresh start.
+2. Diverse Curriculum
+Multiple Educational Programs: Offers comprehensive content for various educational programs such as SAT, IELTS, TOEFL, and Turkish educational standards.
+Study Groups: Facilitates the formation of study groups for collaborative learning.
+3. AI-Powered Learning
+Personalized Learning Paths: Utilizes AI to create tailored study plans based on user performance and preferences.
+Content Generation: Generates practice questions, study plans, and topic explanations using AI.
+4. Progress Tracking
+Analytics Dashboard: Monitors learning progress with detailed analytics and insights.
+Assessment Milestones: Provides assessment milestones to track student performance.
+5. Educational Games
+Interactive Learning: Engages students through educational games and memory-based activities.
+6. User Authentication
+Login System: Allows users to log in to access personalized features and content.
+User Management: Manages user sessions and data securely.
+7. Responsive Design
+Mobile-Friendly Interface: Ensures that the platform is accessible on various devices, including tablets and smartphones.
+8. Content Display
+Dynamic Content Rendering: Displays different types of educational content (study plans, practice questions, explanations) based on user selection.
+Weekly Plan Table: Presents a structured weekly breakdown of topics, objectives, activities, and assessments.
+9. Real-time Communication
+Socket.IO Integration: Enables real-time communication between users for collaborative features like drawing and document sharing.
+10. Customizable Tools
+Tool Selection: Users can select different tools for drawing and interaction on the whiteboard.
+Color and Brush Size Options: Customizes drawing tools with various colors and brush sizes.
+11. File Uploads
+PDF Upload: Users can upload PDF files to the whiteboard for annotation and collaboration.
+12. Navigation and Routing
+React Router: Implements navigation between different components and pages of the application.
+13. Tailwind CSS for Styling
+Utility-First CSS Framework: Utilizes Tailwind CSS for responsive and modern UI design.
+14. Icons and Visuals
+Lucide Icons: Uses Lucide React icons for a visually appealing interface.
+15. Call to Action
+Engagement Buttons: Encourages users to start their learning journey with clear call-to-action buttons.
+16. Error Handling
+Robust Error Management: Handles errors gracefully during content generation and user interactions.
+
+Feature Features
+1. this entagrate with google classroom
+2. ai powered learning will be collaborating with the interactive whiteboard
+Proje Adı: Beyaz Sayfa Uygulaması
+
+Proje Amacı:
+Beyaz Sayfa Uygulaması, öğretmen ve öğrenciler arasında gerçek zamanlı interaktif bir eğitim aracı olarak geliştirilmiştir. Bu uygulama ile öğretmenler ders sırasında veya ders dışı saatlerde öğrencilerle aynı beyaz sayfa üzerinde çalışarak, etkileşimi artırabilir ve öğrenme sürecini hızlandırabilir. Uygulama, özellikle uzaktan eğitimde veya hibrit derslerde sınıf ortamını dijital bir platforma taşımayı amaçlamaktadır.
+
+Proje Tanımı:
+
+Sınıflar ve Tahtalar: Her sınıf için ayrı bir beyaz tahta alanı olacak. Öğretmen, dersi anlatırken veya soru çözerken öğrenciyle aynı beyaz sayfa üzerinde işlem yapabilir.
+Ortak Beyaz Sayfa Kullanımı: Öğretmen ve öğrenciler, aynı beyaz sayfa üzerinde çalışabilir. Örneğin, öğretmen ders sırasında tabletinden bir soru yazar ve öğrenciyi tahtaya kaldırarak soruyu çözmesini ister. Öğrenci, beyaz sayfada soruyu çözerken öğretmen de ek açıklamalar yapabilir veya müdahale edebilir.
+Gerçek Zamanlı Senkronizasyon: Öğrenci ve öğretmen aynı anda beyaz sayfa üzerinde işlem yapabilir; bu da hem öğretmenin hem de öğrencinin ders takibini kolaylaştırır. Herhangi bir gecikme yaşanmadan tüm kullanıcılar sayfada yapılan değişiklikleri anında görebilir.
+Kullanıcı Yetkilendirme: Öğretmen, öğrencilerin yazma yetkisini yönetebilir. Örneğin, yalnızca belirli bir öğrenciyi tahtaya kaldırarak beyaz sayfada çözüm yapmasını sağlayabilir. Aynı zamanda, öğretmen beyaz sayfa üzerinde örnek çözümler yapabilir veya ipuçları ekleyebilir.
+Teknik Detaylar:
+
+Faydalar:
+
+Etkili Etkileşim: Öğrenci ve öğretmenler arasında canlı ve interaktif bir öğrenme süreci sağlar.
+Öğrenme Sürecinin Takibi: Öğrencinin yaptığı çözüm ve öğretmenin yaptığı açıklamalar aynı beyaz sayfa üzerinde yer aldığından, ders takibi kolaylaşır.
+Uzaktan Eğitimde Erişim Kolaylığı: Hibrit veya uzaktan eğitim ortamlarında sınıf içi etkileşimi simüle ederek daha etkili bir eğitim deneyimi sağlar.
+Sonuç:
+Beyaz Sayfa Uygulaması, öğrenci-öğretmen etkileşimini artırarak ders sürecini daha verimli hale getirmeyi amaçlayan, yenilikçi bir dijital eğitim platformudur.
+Proje Adı: Entegre Eğitim Platformu – Öğrenci ve Öğretmen için Çalışma Uygulaması ve Beyaz Sayfa
+
+Proje Amacı:
+Bu platform, öğrencilerin SAT, IELTS, TOEFL gibi uluslararası sınavlar ve Türk eğitim müfredatı gibi çeşitli eğitim programlarına yönelik, kazanımlara odaklı çalışma programları oluşturarak ders etkinliğini artırmayı hedefler. Çalışma Uygulaması ile hazırlanan sorular ve içerikler, Beyaz Sayfa uygulamasına entegre edilerek öğretmen ve öğrencilerin interaktif bir öğrenme süreci geçirmesi sağlanacaktır. Beyaz sayfa üzerinden ders içi etkinliklerin ve örnek soru çözümlerinin yapılması, öğrencilerin gelişim sürecini daha verimli hale getirecektir.
+
+Proje Tanımı:
+
+Farklı Müfredatlar: SAT, IELTS, TOEFL ve Türk eğitim müfredatı gibi seçeneklerle, her bir müfredata özel kazanımlar ve öğrenme içerikleri sunulacak. Bu sayede öğrenciler, ihtiyaçlarına ve hedeflerine uygun bir programla çalışabilecek.
+Genelden Özele Giden Tekrar Programları: Öğrencilere önce genel bir çerçeve sunulacak, ardından konuları ayrıntılı olarak ele alan bir programla detaylara inilecektir.
+Konu Özetleri, Kısa Sorular ve Flashcardlar: Her müfredata özel konu özetleri, kısa sorular ve hızlı öğrenme için flashcardlar sunulacak. Öğrenciler, temel kavramları daha hızlı tekrar edebilir ve eksikliklerini kolayca belirleyebilir.
+Örnek Soru Gönderimi ve Beyaz Sayfaya Aktarma: Çalışma Uygulaması’ndan alınan örnek sorular, Beyaz Sayfa uygulamasına aktarılacak. Böylece öğrenci ve öğretmen, soruları interaktif olarak akıllı tahtadan veya tabletten çözebilecek.
+İki Yönlü Etkileşim: Beyaz sayfa üzerinde öğrenci soruya çözüm yaparken, öğretmen anında müdahale edebilir veya açıklamalar ekleyebilir. Bu iki yönlü etkileşim, hem yüz yüze hem de uzaktan eğitim ortamında kullanılabilecek.
+Basit Oyunlar ve Hafıza Aktiviteleri: Her müfredata özel hafıza ve bilgi oyunları, öğrencilerin konu tekrarını eğlenceli hale getirerek daha kalıcı bir öğrenme sağlar.
+Kazanımlara Yönelik Çalışma ve Zorluk Seviyesi Belirleme: Müfredata uygun kazanımlar üzerinde yoğunlaşan sorular ve içerikler seçilecek, öğrencinin kendi seviyesine göre çalışma yapmasını sağlamak için kolaydan zora zorluk seviyeleri bulunacaktır.
+Gemini API Entegrasyonu:
+
+Konu Özetleri ve Flashcard İçeriği: Gemini API, konu özetleri ve açıklayıcı flashcard içerikleriyle her müfredata uygun bilgi sağlarken, öğrencinin öğrenme hızına göre içeriği dinamik olarak uyarlayacak.
+Akıllı Öneri Sistemi: Öğrencinin önceki çözümlerine ve zorluk seviyesine göre Gemini API, çalışılması gereken konular ve kazanımlara göre özelleştirilmiş öneriler sunabilir.
+Beyaz Sayfa Çözüm İçerikleri ve Anlık Yardım: Beyaz sayfada çözülmek üzere alınan sorular için API, öğrencinin seviyesine uygun ipuçları ve çözüm önerileri sunabilir.
+Dil ve Anlam Desteği: Özellikle TOEFL ve IELTS gibi sınavlara hazırlık sürecinde, öğrencinin anlamını öğrenmek istediği kelime veya ifadeler için Gemini API doğrudan açıklamalar veya örnek cümleler sunabilir.
+Teknik Detaylar:
+
+Altyapı: Mobil ve web tabanlı çalışacak uygulama için Python veya Node.js tabanlı bir backend kullanılacak. Çalışma ve beyaz sayfa uygulamaları arasında veri transferi API entegrasyonlarıyla sağlanacak.
+Akıllı Tahta ve Tablet Desteği: Her iki uygulama soruları akıllı tahtada veya tabletten aynı anda görüntüleyip, çözümleri güncelleyebilecek.
+Teknolojiler: Frontend için React Native veya Flutter gibi mobil uyumlu teknolojiler; veri tabanı için MySQL veya Firebase tercih edilecek.
+Kişiselleştirme ve Başarı Sistemi: Öğrencinin bilgi seviyesine göre uyarlanan içerikler Gemini API üzerinden analiz edilerek başarı sistemi ile desteklenecek.
+Faydalar:
+
+Kapsamlı ve Verimli Öğrenme: Öğrenciler, genelden özele ilerleyen tekrar programları ile kazanımlara odaklanarak daha etkili öğrenir.
+Etkili Etkileşim ve Çözüm Süreci: Öğrenciler ve öğretmenler, beyaz sayfa üzerinde gerçek zamanlı etkileşimle çözüm sürecini daha verimli hale getirir.
+Dinamik İçerik ve Zorluk Seviyesine Göre Uyum: Gemini API ile desteklenen konu özetleri, kısa sorular ve oyunlar ile öğrencinin bilgi seviyesi ve öğrenme tarzına uyum sağlanır.
+Tek Noktadan Çalışma İmkanı: Çalışma ve beyaz sayfa uygulamasının birleşimi, öğrencinin tek bir platform üzerinden öğrenme sürecini kişiselleştirmesine olanak tanır.
+Sonuç:
+Entegre Eğitim Platformu, öğrencilerin çeşitli müfredatlara yönelik kazanımlarını geliştirmelerine olanak tanır ve beyaz sayfa entegrasyonu ile ders içi interaktif etkinlikleri destekler. Gemini API ile zenginleştirilen içerikler ve anlık öneriler sayesinde, öğrencilerin öğrenme süreçleri verimli ve kişiselleştirilmiş hale getirilir. Bu platform, uluslararası sınavlara ve okul müfredatına yönelik çalışmalar için yenilikçi bir eğitim aracı olarak öğrenci ve öğretmenlerin hizmetine sunulur.
+Proje Adı: Beyaz Sayfa Uygulaması - Geometrik Çizim Destekli Uzantı
+
+Proje Amacı:
+Beyaz Sayfa Uygulaması’na eklenen bu özellik, özellikle geometri derslerinde öğretmen ve öğrencilerin çizim becerilerini kolaylaştırarak, dersin verimliliğini artırmayı amaçlar. Geometri dersleri sırasında beyaz sayfa üzerinde kötü çizilmiş üçgenler, çemberler ve diğer geometrik şekiller otomatik olarak kusursuz hale getirilecek; öğretmen ve öğrenciye hazır geometrik taslaklar sunulacaktır.
+
+Proje Tanımı:
+
+Otomatik Şekil Düzeltme: Öğrencinin ya da öğretmenin çizdiği üçgen, kare, çember gibi şekiller, yazılım tarafından algılanarak kusursuz hale getirilecek. Kötü çizilen şekiller, geometrik doğruluğa göre otomatik olarak düzenlenecektir.
+Hazır Geometrik Taslaklar: Beyaz sayfa üzerinde kare, dikdörtgen, üçgen, daire gibi temel geometrik şekillerin hazır taslakları bulunacak. Öğretmen veya öğrenci, hızlıca bu şekillerden seçim yaparak ders içeriğini geliştirebilir.
+Geometriye Özel Beyaz Sayfa Araçları: Uygulama, özel cetvel, pergel ve açı ölçer araçları da içerecek. Böylece, ders sırasında beyaz sayfa üzerinde ölçümler yapılarak şekil çizimlerinde daha yüksek doğruluk sağlanacak.
+Gemini API ile Desteklenen İçerik Önerileri: Özellikle geometri konularında, Gemini API kullanılarak öğrenciye yönelik hazır problem ve çözüm önerileri, ipuçları ya da pratik uygulama alanları sunulabilir.
+Teknik Detaylar:
+
+Şekil Tanıma ve Düzeltme Algoritmaları: Yapay zeka destekli algoritmalar ile kullanıcının çizim şekli anında algılanarak belirli bir düzeltme sağlanacak. Bu sayede her şekil ideal bir geometriye sahip olacak.
+Geometrik Hazır Şablonlar: Öğrenci ve öğretmenin kolay erişimi için hazırlanan hazır geometrik şekiller, uygulama arayüzüne entegre edilerek kullanım kolaylığı sağlanacak.
+Gemini API Entegrasyonu:
+Akıllı İçerik Önerileri: Öğrencinin çizdiği şekillere ve çözdüğü problemlere göre uygun öneriler sağlanabilir. Örneğin, öğrenci bir üçgen çizerse, üçgenin özelliklerine dair kısa bilgiler veya benzer sorular Gemini API tarafından önerilebilir.
+Geometri Konularında Çizim Desteği: Özel geometri dersleri sırasında sık kullanılan teorem ve şekillere yönelik kısa açıklamalar ve pratik notlar da Gemini API ile sağlanabilir.
+Faydalar:
+
+Hızlı ve Kusursuz Çizimler: Öğretmen ve öğrenciler, otomatik şekil düzeltme özelliği ile daha düzgün ve anlaşılır çizimler yapabilir, böylece ders sırasında zamandan tasarruf edilir.
+Daha Kolay Anlatım ve Öğrenim: Hazır taslaklar ve otomatik düzeltme, geometri konularının anlaşılmasını kolaylaştırır.
+Kapsamlı Geometri Araçları: Geometriye özel araçlar (cetvel, pergel vb.) beyaz sayfa uygulamasında öğrencinin temel çizim gereksinimlerini karşılar.
+Dinamik İçerik ve Problem Önerileri: Gemini API, öğrencinin ilerleme seviyesine göre dinamik içerik önerileri sunarak, öğrencinin ihtiyaçlarına uygun bir öğrenme deneyimi sağlar.
+Sonuç:
+Bu genişletilmiş Beyaz Sayfa Uygulaması, geometrik çizimlerde sağladığı otomatik düzeltme ve hazır taslaklar ile, özellikle geometri dersleri için öğretmen ve öğrencilere verimli bir dijital araç sunar. Gemini API desteğiyle, öğrencilere özel içerik ve problem önerileri sağlayarak öğrenme sürecini kişiselleştirir ve destekler.
+
+
+senden yapmanı istediğim şey şu:
+Mevcut durum ve İhtiyaç Analizi 
+sana verdiğim iki proje ideal proje yazıları. lütfen bunlardan örnek alarak bir sistem tasarla. hazırladığımız bu yazılım projesi ise bu sistemin uzantısı olmalı.
+bu proje raporu resmi bir yazı olsun.

@@ -1,0 +1,43 @@
+1. Projenin Uygulanacağı Yer(ler)
+İl, ilçe sıralamasıyla belirtiniz.
+
+2. Proje Faaliyet Süresi (Ay)
+Ay Cinsinden Proje Süresini Belirtiniz.
+
+3. Doğrudan Faydalanıcı Sayısı
+Doğrudan Faydalanıcı Sayısı
+
+4. Dolaylı Faydalanıcı Sayısı
+Dolaylı Faydalanıcı Sayısı
+
+5. Mevcut Durum ve İhtiyaç Analizi
+Bu bölümde projenin odaklandığı toplumsal bir meseleyi, ihtiyaç oluşturan mevcut durumu ve o durumun yol açabileceği diğer ihtiyaç alanlarını açıklayınız. Açıklamanızda hedef kitlenin ihtiyaçlarını belirlemek için yürütülmüş güncel ihtiyaç analiz raporlarına referanslar ve doğrudan gözlemlere ilişkin göndermeler sağlayınız. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.8000 karakter)
+
+6. Projenin Amacı
+Önerilen projenin konusu ve kapsamı net olarak tanımlanmalı; amaç ile ilişkisi açıklanmalıdır. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max. 4000 karakter)
+7. Projenin Hedefleri
+Projenin amaçlarına ulaşmak için alt hedefleri bu bölümde açıklayınız. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.8000 karakter)
+
+8. Proje Tanımı
+Bu bölümde projenin genel amaç ve hedeflerine, çıktılara ve beklenen sonuçlara (etkiler, sonuçlar ve çıktılara) atıfta bulunarak, teklif edilen projenin ve ilgililiğinin ayrıntılı tanımını yapınız. Projenin, hedef kitle nezdinde tespit edilen ihtiyaçlarına ne şekilde yanıt üreteceğini aktivite bazlı olarak yazınız. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.8000 karakter)
+9. Proje Faaliyetleri
+Bu bölümde; proje faaliyetlerinize belirli bir hiyerarşiye ve faaliyet(iş) dökümüne uygun şekilde yer verilmelidir. Faaliyetler arası hiyerarşi oluşturulurken önce yapılacak ana faaliyetler belirlenir, daha sonra bu ana faaliyetlerin uygulamadaki detaylarına inilerek alt faaliyetler belirlenir. Alt faaliyetlerin fazla detaylandırılması veya yeterince detaylandırılmaması durumunda projenin süresinin tespitinde, faaliyetlerin sağlıklı şekilde yürütülmesinde, ihtiyaç duyulan kaynak ve bütçenin belirlenmesinde hatalar oluşabilir. Bu nedenle; proje kapsamında gerçekleştirilecek faaliyetleri, iyi planlamanız projenizin başarılı şekilde sonuçlanmasına katkı sağlayacaktır. ( Örnek; 1. Ana Faaliyet; 1.1. Alt Faaliyet, 1.2. Alt Faaliyet… 2. Ana Faaliyet; 2.1. Alt Faaliyet, 2.2. Alt Faaliyet…) (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.8000 karakter)
+
+10. Projenin Özgün Değeri
+Öngörülen sorunların giderilmesi veya problemlerin çözümüne yönelik ne tür özgün ve yenilikçi öneriler sunduğunuzu açıklayınız. (Uyarı! Metin 
+
+11. Projenin Yöntemi
+Aşağıda belirtilen hususları açıklayınız. • Teklif edilen yöntemin uygulanma nedenleri ve gerekçeleri • Yürütücünün projedeki rollerinin ve hedef kitleden projenin yürütülmesi amacıyla katılım öngörülüyorsa onlara verilecek rollerin tanımlanması ve bu rollerin verilme sebepleri • Projenin uygulanması için önerilen temel araçlar (yöntem, ekipman, araç vb.) • Proje büyük bir programın parçası ise, programa uyum veya programla koordinasyon şekli. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.)  (max.8000 karakter)
+
+12. Proje Personeli Görev ve Sorumlulukları
+Proje ekibinde yer alacak personelin seçimi, görevlendirilmesi, projedeki görev ve sorumluluklarını açıkça belirtiniz. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.8000 karakter)
+13. Temel Çıktı ve Sonuçlar
+Projenin temel çıktı ve sonuçlarını göstergeleriyle birlikte açıklayınız. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.8000 karakter)
+
+14. Sürdürülebilirlik
+Faaliyetlerinin hedef kitle üzerinde oluşturacağı somut etkiler devamlılık arz edecek mi? Proje bitimi sonrasında sürdürülebileceği öngörülen faaliyetler için finans gerekiyor mu? (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.40000 karakter)
+15. Görünürlük Faaliyetleri
+Proje kapsamında öngörülen görünürlük faaliyetlerini açıklayınız. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.)  (max.40000 karakter)
+
+16. İzleme ve Değerlendirme Planı
+Sorumlu personel de dahil olmak üzere program için izleme ve değerlendirme planını tanımlayınız. Hangi izleme ve değerlendirme araçlarının kullanılacağı (anketler, saha ziyaretleri, kilit paydaş görüşmeleri, odak grup görüşmeleri, toplantı tutanakları, zaman çizelgeleri, ilerleme raporları vb.) ölçümlerin zaman çizelgesini ve sıklığını dahil ediniz. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.8000 karakter)

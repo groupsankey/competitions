@@ -1,0 +1,77 @@
+ Mevcut Durum ve İhtiyaç Analizi
+Proje, eğitimde dijitalleşmenin giderek önem kazanması ve öğretmen-öğrenci etkileşiminde daha verimli bir ortam sağlama ihtiyacından doğmuştur. Özellikle hibrit ve uzaktan eğitim modelinde yaşanan iletişim kopuklukları, öğrencilerin akademik başarılarını olumsuz etkileyebilmektedir. Yüz yüze eğitimin sağladığı anında geri bildirim ve birebir etkileşim imkanı, dijital platformlarda sınırlı kalmaktadır. Ayrıca, eğitimin bireyselleştirilmesi ihtiyacı öğretmenlerin iş yükünü artırmakta ve mevcut sistemlerde belirgin bir zorluk yaratmaktadır.
+
+Yapılan ihtiyaç analizleri, eğitimin sürdürülebilir ve erişilebilir bir yapıya kavuşması için öğretmen ve öğrenciler arasında dijital platformlarda güçlü bir iş birliğine gerek duyulduğunu göstermektedir. Öğrenciler, kendi seviyelerine uygun eğitim içeriklerine ulaşma, konuları daha iyi anlama ve pratik yapma imkanına ihtiyaç duymaktadır. Aynı zamanda, öğretmenler de bu süreçte kolay erişilebilir, pratik ve etkin bir platform üzerinden öğrencileriyle etkileşime geçmek istemektedir. Beyaz Sayfa Uygulaması, bu ihtiyaçlara yanıt veren, esnek ve sürdürülebilir bir çözüm sunmayı hedeflemektedir.
+
+5. Projenin Amacı
+Projenin temel amacı, öğrenci ve öğretmenler arasında verimli, erişilebilir ve sürdürülebilir bir eğitim aracı yaratmaktır. Beyaz Sayfa Uygulaması, dijital eğitimde etkileşimi artırarak öğrencilerin bilgiye erişimini hızlandırmayı ve ders süreçlerini daha verimli hale getirmeyi amaçlar. Uzaktan ve hibrit eğitimde ders işleme, geri bildirim sağlama ve bireysel çalışmaları teşvik etme gibi ihtiyaçlar, bu projenin temel odak noktalarıdır.
+
+Proje kapsamında sunulan uygulama ile öğrenciler ve öğretmenler, ders süresince gerçek zamanlı olarak etkileşimde bulunarak öğrenim sürecini zenginleştirebilecektir. Öğretmenler, ders içeriklerini etkili bir biçimde aktarabilecek, öğrencilere anında geri bildirim verebilecek, öğrencilerin öğrenme sürecini daha yakından takip edebileceklerdir.
+
+6. Projenin Hedefleri
+Proje, temel amacı destekleyen alt hedeflere sahiptir. Bu alt hedefler:
+
+Öğrenci Katılımını Artırmak: Beyaz Sayfa Uygulaması üzerinden sunulan interaktif araçlarla öğrencilerin derslere aktif olarak katılım sağlaması, bu hedeflerin başında gelir. Bu katılımın, derslere devamlılık oranını ve öğrenim başarısını artırması beklenmektedir.
+
+Öğretmenlerin Etkileşimi Kolaylaştırmak: Öğretmenlerin öğrencilere gerçek zamanlı geri bildirim verebilmelerini sağlamak, ders içeriklerini etkili bir şekilde aktarmalarını kolaylaştırmak ve bireysel gelişim süreçlerini daha verimli yönetmelerine imkan tanımak.
+
+Dijital Erişimi Desteklemek: Uygulamanın, hem yüz yüze hem de dijital ortamlarda kullanılabilmesi, öğrenci ve öğretmenlerin her an ulaşabilecekleri esnek bir eğitim platformu yaratmak anlamına gelir. Böylece uygulama, her iki eğitim modelinde de kolaylık sağlayacaktır.
+
+Bireyselleştirilmiş Öğrenim Deneyimi Sunmak: Öğrencilerin kendi öğrenim süreçlerini izleyebileceği, konuları kendi hızlarına uygun şekilde tekrarlayabileceği bir yapı sunarak eğitimde kişiselleştirmenin sağlanması.
+
+7. Proje Tanımı
+Beyaz Sayfa Uygulaması, öğrenciler ve öğretmenler arasında dijital bir köprü kurarak derslerin daha interaktif ve etkili bir şekilde işlenmesini sağlar. Uygulama, öğretmenlere sanal bir sınıf ortamı sunarken, öğrenciler için esnek bir çalışma alanı yaratır. Bu sayede, öğrenci başarısını artırmaya yönelik yapay zeka destekli içerikler, kişiselleştirilmiş eğitim desteği ve etkileşimli eğitim materyalleri sağlanır.
+
+Beklenen Sonuçlar:
+
+Eğitimde Erişim Kolaylığı: Eğitim kaynaklarına erişimin sağlanması ile öğrenci başarısında artış hedeflenir.
+Geri Bildirim Süreçlerinin Hızlanması: Öğretmenlerin öğrencilere anında geri bildirim verebilmesi, öğrenim sürecinde verimliliği artıracaktır.
+Öğrenci İlerleme Takibi: Öğretmenlerin öğrencilerin gelişim süreçlerini daha etkin takip etmesi, eksik veya zayıf olunan alanlara yönelik çalışmalar yapılmasını mümkün kılar.
+Dijital Eğitimde Eşitlik: Öğrencilerin farklı cihazlardan kolayca erişebileceği bu platform ile dijital eğitimde fırsat eşitliğinin sağlanması hedeflenir.
+8. Proje Faaliyetleri
+1. Ana Faaliyet: Projenin Hazırlık Süreci
+
+1.1 Alt Faaliyet: Uygulamanın geliştirilmesi ve gerekli yazılım altyapısının sağlanması.
+1.2 Alt Faaliyet: Pilot uygulamalarla öğretmen ve öğrenci geri bildirimlerinin alınması.
+1.3 Alt Faaliyet: Kullanıcı rehberlerinin oluşturulması.
+2. Ana Faaliyet: Beyaz Sayfa Uygulaması'nın Eğitim Ortamlarına Entegrasyonu
+
+2.1 Alt Faaliyet: Eğitim kurumları ile iş birliklerinin sağlanması.
+2.2 Alt Faaliyet: Öğretmen ve öğrencilere yönelik tanıtım ve bilgilendirme toplantılarının yapılması.
+2.3 Alt Faaliyet: Uygulama kullanımına yönelik eğitimlerin verilmesi.
+3. Ana Faaliyet: Geri Bildirim ve Geliştirme Çalışmaları
+
+3.1 Alt Faaliyet: Kullanıcı deneyimlerinin analiz edilmesi.
+3.2 Alt Faaliyet: Yazılımın geri bildirimler doğrultusunda güncellenmesi ve geliştirilmesi.
+3.3 Alt Faaliyet: Düzenli değerlendirme raporlarıyla proje sürecinin izlenmesi.
+9. Projenin Özgün Değeri
+Beyaz Sayfa Uygulaması, eğitimde dijitalleşmenin gerekliliğini karşılamak için tasarlanmış yenilikçi bir platform olarak öne çıkar. Bu proje, hem uzaktan hem de yüz yüze eğitimde kullanılabilen interaktif araçları, sanal ders içi iş birliği olanaklarını, öğrencilerin bilgiye erişim hızını artıran yapay zeka destekli içerikleri sunarak benzerlerinden ayrılır. Uygulamanın öğrencilerin bireysel öğrenim hedeflerine göre kişiselleştirilebilmesi, özgün yapısının temel unsurlarındandır.
+
+Ayrıca, uygulama kullanıcılara sadece öğrenim imkanı değil, aynı zamanda gelişim ve değerlendirme süreçlerini de takip edebilecekleri bir alan sunar. Öğrenciler, öğretmenlerinden anında geri bildirim alırken, öğrenme sürecini daha etkili hale getirebilirler.
+
+10. Projenin Yöntemi
+Bu proje, dijital eğitimde sürdürülebilirliği sağlamayı hedefleyen bir metodolojiye dayanmaktadır. İlk olarak, proje süresince anketler, kullanıcı geri bildirimleri ve gözlem raporlarıyla uygulamanın verimliliği analiz edilir. Elde edilen veriler doğrultusunda yazılım güncellenir, eksiklikler giderilir ve kullanıcı deneyimi iyileştirilir.
+
+Katılımcıların Rolleri: Öğretmenler ve öğrenciler, uygulama içinde aktif bir rol üstlenir. Öğretmenler içerik hazırlığı ve geri bildirim sağlama sürecinde görev alırken, öğrenciler de kendi öğrenim süreçlerini yöneterek bireysel performanslarını takip edebilecektir.
+
+Araçlar: Proje süresince kullanıcılara yönelik rehber dokümanlar, eğitim içerikleri ve öğretim materyalleri sağlanacaktır.
+
+11. Proje Personeli Görev ve Sorumlulukları
+Proje Yöneticisi: Projenin tüm süreçlerini yönetir ve genel stratejiyi belirler.
+Teknik Ekip: Yazılım geliştirme, hata giderme ve sistem güncellemelerinden sorumlu.
+Eğitim Danışmanları: Uygulama içeriğinin pedagojik uygunluğunu sağlamak, kullanıcı rehberleri hazırlamak ve eğitimler düzenlemekle yükümlüdür.
+İzleme ve Değerlendirme Sorumlusu: Kullanıcı geri bildirimlerini analiz eder, periyodik raporlar hazırlar ve projenin verimliliğini artırmaya yönelik öneriler sunar.
+12. Temel Çıktı ve Sonuçlar
+Çıktılar:
+Öğrencilerin bilgiye erişim hızında artış
+Öğretmenlerin ders sürecini verimli bir şekilde yönetmesi
+Uzaktan ve hibrit eğitimde fırsat eşitliği sağlanması
+Öğrencilerin akademik başarılarındaki artış
+Sonuçlar:
+Eğitimde dijitalleşmenin hız kazanması, öğrenci başarısının artması ve öğretmen-öğrenci etkileşiminin güçlenmesi beklenmektedir.
+13. Sürdürülebilirlik
+Projenin sürdürülebilirliği açısından, yazılımın belirli dönemlerde güncellenmesi ve kullanıcı geri bildirimlerinin dikkate alınması gerekmektedir. Ayrıca, proje tamamlandıktan sonra kurulan dijital altyapı, yeni içeriklerin eklenmesi ve daha fazla kullanıcıya ulaşması için genişletilebilir. Bu süreçte yerel yönetimler ve eğitim kurumlarıyla iş birliği yapılması, projenin uzun vadede sürdürülebilirliğini artıracaktır.
+14. Görünürlük Faaliyetleri
+Beyaz Sayfa Uygulaması’nın tanıtımı için çeşitli görünürlük çalışmaları planlanmıştır. Eğitim kurumlarında, sosyal medyada, yerel basında ve çevrim içi platformlarda tanıtımlar yapılarak proje geniş bir kitleye duyurulacaktır. Ayrıca, kullanıcı deneyimlerini paylaşan tanıtım videoları ve bilgilendirici içerikler sosyal medya platformlarında yayımlanacaktır.
+15. İzleme ve Değerlendirme Planı
+Projenin başarısını ölçmek için belirli dönemlerde anketler yapılacak, kullanıcı deneyimleri analiz edilerek raporlanacaktır. İzleme süreci, kullanıcı geri bildirimlerine dayalı olarak yapılacak güncellemelerle desteklenecektir. İlerleme raporları, öğretmen ve öğrencilerin uygulamadan ne ölçüde faydalandığını değerlendirecek ve projenin başarısını artırmak için gerekli önlemleri belirleyecektir.
