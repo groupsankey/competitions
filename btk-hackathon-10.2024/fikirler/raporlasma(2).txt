@@ -61,6 +61,7 @@ Proje Yöneticisi: Projenin tüm süreçlerini yönetir ve genel stratejiyi beli
 Teknik Ekip: Yazılım geliştirme, hata giderme ve sistem güncellemelerinden sorumlu.
 Eğitim Danışmanları: Uygulama içeriğinin pedagojik uygunluğunu sağlamak, kullanıcı rehberleri hazırlamak ve eğitimler düzenlemekle yükümlüdür.
 İzleme ve Değerlendirme Sorumlusu: Kullanıcı geri bildirimlerini analiz eder, periyodik raporlar hazırlar ve projenin verimliliğini artırmaya yönelik öneriler sunar.
+
 12. Temel Çıktı ve Sonuçlar
 Çıktılar:
 Öğrencilerin bilgiye erişim hızında artış
@@ -69,6 +70,7 @@ Uzaktan ve hibrit eğitimde fırsat eşitliği sağlanması
 Öğrencilerin akademik başarılarındaki artış
 Sonuçlar:
 Eğitimde dijitalleşmenin hız kazanması, öğrenci başarısının artması ve öğretmen-öğrenci etkileşiminin güçlenmesi beklenmektedir.
+
 13. Sürdürülebilirlik
 Projenin sürdürülebilirliği açısından, yazılımın belirli dönemlerde güncellenmesi ve kullanıcı geri bildirimlerinin dikkate alınması gerekmektedir. Ayrıca, proje tamamlandıktan sonra kurulan dijital altyapı, yeni içeriklerin eklenmesi ve daha fazla kullanıcıya ulaşması için genişletilebilir. Bu süreçte yerel yönetimler ve eğitim kurumlarıyla iş birliği yapılması, projenin uzun vadede sürdürülebilirliğini artıracaktır.
 14. Görünürlük Faaliyetleri

@@ -15,11 +15,13 @@ Bu bölümde projenin odaklandığı toplumsal bir meseleyi, ihtiyaç oluşturan
 
 6. Projenin Amacı
 Önerilen projenin konusu ve kapsamı net olarak tanımlanmalı; amaç ile ilişkisi açıklanmalıdır. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max. 4000 karakter)
+
 7. Projenin Hedefleri
 Projenin amaçlarına ulaşmak için alt hedefleri bu bölümde açıklayınız. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.8000 karakter)
 
 8. Proje Tanımı
 Bu bölümde projenin genel amaç ve hedeflerine, çıktılara ve beklenen sonuçlara (etkiler, sonuçlar ve çıktılara) atıfta bulunarak, teklif edilen projenin ve ilgililiğinin ayrıntılı tanımını yapınız. Projenin, hedef kitle nezdinde tespit edilen ihtiyaçlarına ne şekilde yanıt üreteceğini aktivite bazlı olarak yazınız. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.8000 karakter)
+
 9. Proje Faaliyetleri
 Bu bölümde; proje faaliyetlerinize belirli bir hiyerarşiye ve faaliyet(iş) dökümüne uygun şekilde yer verilmelidir. Faaliyetler arası hiyerarşi oluşturulurken önce yapılacak ana faaliyetler belirlenir, daha sonra bu ana faaliyetlerin uygulamadaki detaylarına inilerek alt faaliyetler belirlenir. Alt faaliyetlerin fazla detaylandırılması veya yeterince detaylandırılmaması durumunda projenin süresinin tespitinde, faaliyetlerin sağlıklı şekilde yürütülmesinde, ihtiyaç duyulan kaynak ve bütçenin belirlenmesinde hatalar oluşabilir. Bu nedenle; proje kapsamında gerçekleştirilecek faaliyetleri, iyi planlamanız projenizin başarılı şekilde sonuçlanmasına katkı sağlayacaktır. ( Örnek; 1. Ana Faaliyet; 1.1. Alt Faaliyet, 1.2. Alt Faaliyet… 2. Ana Faaliyet; 2.1. Alt Faaliyet, 2.2. Alt Faaliyet…) (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.8000 karakter)
 
@@ -31,6 +33,7 @@ Aşağıda belirtilen hususları açıklayınız. • Teklif edilen yöntemin uy
 
 12. Proje Personeli Görev ve Sorumlulukları
 Proje ekibinde yer alacak personelin seçimi, görevlendirilmesi, projedeki görev ve sorumluluklarını açıkça belirtiniz. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.8000 karakter)
+
 13. Temel Çıktı ve Sonuçlar
 Projenin temel çıktı ve sonuçlarını göstergeleriyle birlikte açıklayınız. (Uyarı! Metin içeriğinde STK(vakıf ve dernek) ismine yer verilmemelidir.) (max.8000 karakter)
 
